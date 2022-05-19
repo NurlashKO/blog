@@ -18,7 +18,10 @@ docker run $(DOCKER_DEFAULT_ARGS watcher) \
     containrrr/watchtower --revive-stopped --interval 5
 
 # Deploy microservices
-docker run $(DOCKER_DEFAULT_ARGS loadbalancer) \
-    -p 80:80 \
-    -p 443:443 \
-    gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+mkdir -p certificates/nginx_secrets && \
+  docker run $(DOCKER_DEFAULT_ARGS loadbalancer) \
+      -p 80:80 \
+      -p 443:443 \
+      --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \
+      -v $(pwd)/certificates:/etc/letsencrypt \
+      gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
