@@ -7,7 +7,6 @@ DOCKER_DEFAULT_ARGS() {
 
 # Cleanup everything
 docker kill $(docker ps -q)
-docker system prune -af
 
 # Setup networking
 docker network create internal
@@ -16,7 +15,7 @@ docker network create internal
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v /home/"$USER"/.docker/config.json:/config.json \
-    containrrr/watchtower --revive-stopped --interval 5
+    containrrr/watchtower --include-stopped --revive-stopped --cleanup --interval 5
 
 # Deploy microservices
 mkdir -p certificates && \
