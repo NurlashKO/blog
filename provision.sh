@@ -18,7 +18,7 @@ docker run $(DOCKER_DEFAULT_ARGS watcher) \
     containrrr/watchtower --revive-stopped --interval 5
 
 # Deploy microservices
-mkdir -p certificates/nginx_secrets && \
+mkdir -p certificates && \
   docker run $(DOCKER_DEFAULT_ARGS loadbalancer) \
       -p 80:80 \
       -p 443:443 \
