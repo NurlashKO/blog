@@ -1,0 +1,24 @@
+name: Deploy Loadbalancer CI
+
+on:
+  push:
+    paths:
+      - 'loadbalancer/**'
+
+jobs:
+
+  build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Login to a container registry
+      env:
+        CR_LOGIN: ${{ secrets.CR_LOGIN }}
+        CR_PASS: ${{ secrets.CR_PASS }}
+      run: echo "$CR_PASS" | docker login --username="$CR_LOGIN" --password-stdin https://gcr.io
+    - name: Build the Docker image
+      run: docker build loadbalancer -t gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+    - name: Push the Docker image
+      run: docker push gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+  
