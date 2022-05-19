@@ -1,0 +1,17 @@
+name: Loadbalancer CI
+
+on:
+  push:
+    paths:
+      - 'loadbalancer/**'
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . --file loadbalancer/Dockerfile
