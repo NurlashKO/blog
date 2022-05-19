@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_ARGS() {
+DOCKER_DEFAULT_ARGS() {
   local name="$1";
   echo "-d --rm --network internal --hostname ${name} --name ${name}"
 }
