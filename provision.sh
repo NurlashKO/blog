@@ -2,11 +2,12 @@
 
 DOCKER_DEFAULT_ARGS() {
   local name="$1";
-  echo "-d --rm --network internal --hostname ${name} --name ${name}"
+  echo "-d --network internal --hostname ${name} --name ${name}"
 }
 
 # Cleanup everything
 docker kill $(docker ps -q)
+docker system prune -f
 
 # Setup networking
 docker network create internal
