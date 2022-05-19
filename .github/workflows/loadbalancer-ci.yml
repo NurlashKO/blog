@@ -3,7 +3,7 @@ name: Deploy Loadbalancer CI
 on:
   push:
     paths:
-      - 'loadbalancer/**'
+      - 'microservices/loadbalancer/**'
 
 jobs:
 
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build loadbalancer -t gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+      run: docker build microservices/loadbalancer -t gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
     - name: Push the Docker image
       env:
         CR_LOGIN: ${{ secrets.CR_LOGIN }}

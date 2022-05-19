@@ -25,3 +25,7 @@ mkdir -p certificates && \
       --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \
       -v $(pwd)/certificates:/etc/letsencrypt \
       gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+
+
+docker run $(DOCKER_DEFAULT_ARGS blog) \
+    gcr.io/kouzoh-p-nurlashko/nurlashko/blog
