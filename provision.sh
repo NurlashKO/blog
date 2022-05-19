@@ -15,6 +15,7 @@ docker network create internal
 # Deploy container watcher
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
+    -v /home/"$USER"/.docker/config.json:/config.json \
     containrrr/watchtower --revive-stopped --interval 5
 
 # Deploy microservices
