@@ -1,12 +1,14 @@
-#!/bin/bash
+#!/bin/sh
+
+PROVISIONER_MARK="__provisioner-managed__"
 
 DOCKER_DEFAULT_ARGS() {
-  local name="$1";
-  echo "-d --network internal --hostname ${name} --name ${name}"
+  name="$1";
+  echo "-detach --network internal --hostname ${name} --name ${name} --label ${PROVISIONER_MARK}"
 }
 
 # Cleanup everything
-docker kill $(docker ps -q)
+docker kill $(docker ps -f "label=$PROVISIONER_MARK" -q)
 docker system prune -f
 
 # Setup networking
