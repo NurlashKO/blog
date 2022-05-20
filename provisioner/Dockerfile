@@ -3,8 +3,9 @@ FROM debian:buster-slim
 WORKDIR /opts/provision
 
 COPY . .
+RUN mkdir tmp
 
-ENTRYPOINT ["sleep", "infinity"]
+ENTRYPOINT cp /opts/provision/provision.sh tmp/ && sleep infinity
 
 #docker run \
 #	-v /home/"$USER"/.docker/config.json:/root/.docker/config.json \

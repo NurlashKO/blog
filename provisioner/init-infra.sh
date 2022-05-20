@@ -20,4 +20,5 @@ WantedBy=timers.target
 EOM
 
 docker pull gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
+docker run -d -v /home/nurlashko/provision:/opts/provision/tmp
 docker run -d -v /home/nurlashko/provision:/opts/provision gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
