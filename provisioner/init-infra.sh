@@ -23,5 +23,5 @@ systemctl start redshift.timer
 
 docker kill $(docker ps -q)
 docker pull gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
-docker run -d -v /home/nurlashko/provision:/opts/provision/tmp gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
+docker run --name provisioner -d -v /home/nurlashko/provision:/opts/provision/tmp gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
 

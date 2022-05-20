@@ -7,7 +7,7 @@ PROVISIONER_MARK="__provisioner-managed__"
 
 DOCKER_DEFAULT_ARGS() {
   name="$1";
-  echo "-detach --network internal --hostname ${name} --name ${name} --label ${PROVISIONER_MARK} --label test --label test2"
+  echo "-detach --network internal --hostname ${name} --name ${name} --label ${PROVISIONER_MARK} --label test --label test2 --label3"
 }
 
 # Cleanup everything
