@@ -4,8 +4,8 @@ cat > /etc/systemd/system/blog.service <<- EOM
 [Unit]
 Description=Provision infrastructure
 [Service]
-ExecStart=/bin/sh /home/nurlashko/provision.sh
-ExecPost=/bin/rm -rf /home/nurlashko/provision.sh
+ExecStart=/bin/sh /home/nurlashko/provision/run.sh
+ExecPost=/bin/rm -rf /home/nurlashko/provision/run.sh
 EOM
 
 cat > /etc/systemd/system/blog.timer <<- EOM
@@ -19,4 +19,4 @@ AccuracySec=1ms
 WantedBy=timers.target
 EOM
 
-docker run -v /home/nurlashko/provision.sh:/provision.sh gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
+docker run -d -v /home/nurlashko/provision:/opts/provision gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
