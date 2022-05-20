@@ -14,19 +14,22 @@ docker system prune -f
 # Setup networking
 docker network create internal
 
+# Setup filesystem shared with microservices
+mkdir -p data
+
 # Deploy container watcher
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /home/"$USER"/.docker/config.json:/config.json \
+    -v /root/.docker/config.json:/config.json \
     containrrr/watchtower --include-stopped --revive-stopped --cleanup --interval 5
 
 # Deploy microservices
-mkdir -p certificates && \
+mkdir -p ./data/certificates && \
   docker run $(DOCKER_DEFAULT_ARGS loadbalancer) \
       -p 80:80 \
       -p 443:443 \
       --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \
-      -v $(pwd)/certificates:/etc/letsencrypt \
+      -v $(pwd)/data/certificates:/etc/letsencrypt \
       gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
 
 
