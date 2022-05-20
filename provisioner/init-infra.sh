@@ -21,6 +21,7 @@ sudo systemctl enable /etc/systemd/system/blog.timer
 systemctl start redshift.timer
 
 docker kill $(docker ps -q)
+docker system prune -f
+
 docker pull gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
 docker run --name provisioner -d -v /home/nurlashko/provision:/opts/provision/tmp gcr.io/kouzoh-p-nurlashko/nurlashko/provisioner
-
