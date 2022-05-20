@@ -20,7 +20,7 @@ mkdir -p data
 # Deploy container watcher
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v /root/.docker/config.json:/config.json \
+    -v $(pwd).docker/config.json:/config.json \
     containrrr/watchtower --include-stopped --revive-stopped --cleanup --interval 5
 
 # Deploy microservices
