@@ -1,12 +1,12 @@
-FROM docker:20.10
+FROM debian:buster-slim
 
 WORKDIR /opts/provision
 
 COPY . .
 
-ENTRYPOINT ["./provision.sh"]
+ENTRYPOINT ["sleep", "infinity"]
 
-#RUN docker run \
+#docker run \
 #	-v /home/"$USER"/.docker/config.json:/root/.docker/config.json \
 #	-v /var/run/docker.sock:/var/run/docker.sock \
 #	-v /home/"$USER"/data:/opts/provision/data \
