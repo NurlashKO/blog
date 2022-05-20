@@ -7,7 +7,7 @@ PROVISIONER_MARK="__provisioner-managed__"
 
 DOCKER_DEFAULT_ARGS() {
   name="$1";
-  echo "-detach --network internal --hostname ${name} --name ${name} --label ${PROVISIONER_MARK} --label test --label test2 --label3"
+  echo "-detach --network internal --hostname ${name} --name ${name} --label ${PROVISIONER_MARK} --label test --label test2 --label test3"
 }
 
 # Cleanup everything
@@ -23,7 +23,7 @@ mkdir -p data
 # Deploy container watcher
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
-    -v $(pwd).docker/config.json:/config.json \
+    -v $(pwd)/.docker/config.json:/config.json \
     containrrr/watchtower --include-stopped --revive-stopped --cleanup --interval 5
 
 # Deploy microservices
