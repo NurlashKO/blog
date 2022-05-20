@@ -1,4 +1,4 @@
-name: Deploy Loadbalancer CI
+name: Deploy Provisioner CI
 
 on:
   push:
