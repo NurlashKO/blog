@@ -30,7 +30,7 @@ docker run $(DOCKER_DEFAULT_ARGS loki) \
     gcr.io/kouzoh-p-nurlashko/nurlashko/loki
 
 docker run $(DOCKER_DEFAULT_ARGS promtail) \
-    /var/lib/docker/:/var/lib/docker:ro \
+    -v /var/lib/docker/:/var/lib/docker:ro \
     gcr.io/kouzoh-p-nurlashko/nurlashko/promtail
 
 mkdir -p ./data/certificates && \
