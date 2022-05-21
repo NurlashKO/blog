@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'microservices/ingress/**'
+  workflow_dispatch:
 
 jobs:
 
