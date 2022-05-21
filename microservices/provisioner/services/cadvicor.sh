@@ -1,4 +1,4 @@
-docker run $(DOCKER_DEFAULT_ARGS cadvicor) \
+docker run $(DOCKER_DEFAULT_ARGS cadvisor) \
     --volume=/:/rootfs:ro \
     --volume=/var/run:/var/run:ro \
     --volume=/sys:/sys:ro \
@@ -6,4 +6,4 @@ docker run $(DOCKER_DEFAULT_ARGS cadvicor) \
     --volume=/dev/disk/:/dev/disk:ro \
     --privileged \
     --device=/dev/kmsg \
-  gcr.io/kouzoh-p-nurlashko/nurlashko/cadvicor
+  gcr.io/kouzoh-p-nurlashko/nurlashko/cadvisor

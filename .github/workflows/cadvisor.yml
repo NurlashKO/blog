@@ -1,4 +1,4 @@
-name: cAdvicor CI
+name: cAdvisor CI
 
 on:
   push:
@@ -13,12 +13,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build microservices/cadvisor -t gcr.io/kouzoh-p-nurlashko/nurlashko/cadvicor
+      run: docker build microservices/cadvisor -t gcr.io/kouzoh-p-nurlashko/nurlashko/cadvisor
     - name: Push the Docker image
       env:
         CR_LOGIN: ${{ secrets.CR_LOGIN }}
         CR_PASS: ${{ secrets.CR_PASS }}
       run: |
         echo "$CR_PASS" | docker login --username="$CR_LOGIN" --password-stdin https://gcr.io    
-        docker push gcr.io/kouzoh-p-nurlashko/nurlashko/cadvicor
+        docker push gcr.io/kouzoh-p-nurlashko/nurlashko/cadvisor
   
