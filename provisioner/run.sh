@@ -33,7 +33,7 @@ mkdir -p ./data/certificates && \
       -p 443:443 \
       --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \
       -v $(pwd)/data/certificates:/etc/letsencrypt \
-      gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+      gcr.io/kouzoh-p-nurlashko/nurlashko/ingress
 
 
 docker run $(DOCKER_DEFAULT_ARGS blog) \
