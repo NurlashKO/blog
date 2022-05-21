@@ -6,7 +6,7 @@ Description=Provision infrastructure
 [Service]
 User=nurlashko
 Group=nurlashko
-ExecStart=/bin/sh -c "sh /home/nurlashko/provision/run.sh && sudo rm -rf /home/nurlashko/provision/run.sh "
+ExecStart=/bin/bash -c "bash /home/nurlashko/provision/run.sh && sudo rm -rf /home/nurlashko/provision/run.sh "
 EOM'
 
 sudo bash -c 'cat > /etc/systemd/system/blog.timer <<- EOM
