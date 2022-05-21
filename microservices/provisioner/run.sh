@@ -37,10 +37,13 @@ mkdir -p ./data/certificates && \
   docker run $(DOCKER_DEFAULT_ARGS ingress) \
       -p 80:80 \
       -p 443:443 \
-      --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \
       -v $(pwd)/data/certificates:/etc/letsencrypt \
       gcr.io/kouzoh-p-nurlashko/nurlashko/ingress
 
 
 docker run $(DOCKER_DEFAULT_ARGS blog) \
     gcr.io/kouzoh-p-nurlashko/nurlashko/blog
+
+docker run $(DOCKER_DEFAULT_ARGS grafana) \
+    -v grafana-storage:/var/lib/grafana \
+    gcr.io/kouzoh-p-nurlashko/nurlashko/grafana
