@@ -1,6 +1,3 @@
-#!/bin/bash
-source _utils.sh
-
 mkdir -p ./data/certificates
 
 docker run $(DOCKER_DEFAULT_ARGS ingress)

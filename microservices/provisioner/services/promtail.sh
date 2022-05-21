@@ -1,6 +1,3 @@
-#!/bin/bash
-source _utils.sh
-
 docker run $(DOCKER_DEFAULT_ARGS promtail) \
     -v /var/lib/docker/:/var/lib/docker:ro \
     -v /var/log/journal/:/var/log/journal/:ro \
