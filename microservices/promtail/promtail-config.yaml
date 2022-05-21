@@ -16,6 +16,22 @@ scrape_configs:
         labels:
           job: varlogs
           __path__: /var/log/*log
+  - job_name: systemd-journal
+    journal:
+      labels:
+        cluster: ops-tools1
+        job: default/systemd-journal
+      path: /var/log/journal
+    relabel_configs:
+      - source_labels:
+          - __journal__systemd_unit
+        target_label: systemd_unit
+      - source_labels:
+          - __journal__hostname
+        target_label: nodename
+      - source_labels:
+          - __journal_syslog_identifier
+        target_label: syslog_identifier
 
   - job_name: containers
     static_configs:
@@ -36,14 +52,17 @@ scrape_configs:
             tag:
           source: attrs
       - regex:
-          expression: (?P<container_name>(?:[^|]*[^|]))
+          expression: (?P<image_name>(?:[^|]*[^|])).(?P<container_name>(?:[^|]*[^|])).(?P<image_id>(?:[^|]*[^|])).(?P<container_id>(?:[^|]*[^|]))
           source: tag
       - timestamp:
           format: RFC3339Nano
           source: time
       - labels:
-          # tag:
+          tag:
           stream:
+          image_name:
           container_name:
+          image_id:
+          container_id:
       - output:
           source: output
