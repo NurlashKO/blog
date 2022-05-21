@@ -25,6 +25,10 @@ docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v $(pwd)/.docker/config.json:/config.json \
     gcr.io/kouzoh-p-nurlashko/nurlashko/watcher
 
+docker run $(DOCKER_DEFAULT_ARGS loki) \
+    --mount source=loki-data,target=/loki \
+    gcr.io/kouzoh-p-nurlashko/nurlashko/loki
+
 mkdir -p ./data/certificates && \
   docker run $(DOCKER_DEFAULT_ARGS ingress) \
       -p 80:80 \
