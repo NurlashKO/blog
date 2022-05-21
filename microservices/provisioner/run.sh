@@ -13,6 +13,4 @@ docker network create internal
 mkdir -p data
 
 # Provision microservices
-for f in services/*.sh; do
-  ./"$f"
-done
+source <(cat provision/services/*)
