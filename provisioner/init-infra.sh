@@ -4,6 +4,8 @@ sudo bash -c 'cat > /etc/systemd/system/blog.service <<- EOM
 [Unit]
 Description=Provision infrastructure
 [Service]
+User=nurlashko
+Group=nurlashko
 ExecStart=/bin/sh -c "sh /home/nurlashko/provision/run.sh && rm -rf /home/nurlashko/provision/run.sh "
 EOM'
 
@@ -18,7 +20,7 @@ WantedBy=default.target
 EOM'
 
 sudo systemctl enable /etc/systemd/system/blog.timer
-systemctl start blog.timer
+sudo systemctl start blog.timer
 
 docker kill $(docker ps -q)
 docker system prune -f

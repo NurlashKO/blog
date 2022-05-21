@@ -1,6 +1,5 @@
 #!/bin/sh
 
-su - nurlashko
 cd /home/nurlashko
 
 PROVISIONER_MARK="__provisioner-managed__"
