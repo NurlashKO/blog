@@ -18,7 +18,7 @@ WantedBy=default.target
 EOM'
 
 sudo systemctl enable /etc/systemd/system/blog.timer
-systemctl start redshift.timer
+systemctl start blog.timer
 
 docker kill $(docker ps -q)
 docker system prune -f

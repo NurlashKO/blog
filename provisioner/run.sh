@@ -28,7 +28,7 @@ docker run $(DOCKER_DEFAULT_ARGS watcher) \
 
 # Deploy microservices
 mkdir -p ./data/certificates && \
-  docker run $(DOCKER_DEFAULT_ARGS loadbalancer) \
+  docker run $(DOCKER_DEFAULT_ARGS ingress) \
       -p 80:80 \
       -p 443:443 \
       --env CERTBOT_EMAIL=zh.nurlan96@gmail.com \

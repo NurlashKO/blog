@@ -1,9 +1,9 @@
-name: Deploy Loadbalancer CI
+name: Deploy Ingress CI
 
 on:
   push:
     paths:
-      - 'microservices/loadbalancer/**'
+      - 'microservices/ingress/**'
 
 jobs:
 
@@ -13,7 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build microservices/loadbalancer -t gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
+      run: docker build microservices/ingress -t gcr.io/kouzoh-p-nurlashko/nurlashko/nginx
     - name: Push the Docker image
       env:
         CR_LOGIN: ${{ secrets.CR_LOGIN }}
