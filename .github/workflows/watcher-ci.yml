@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - 'microservices/watcher/**'
-
+  workflow_dispatch:
 jobs:
 
   build-push:
