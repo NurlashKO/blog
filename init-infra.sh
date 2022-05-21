@@ -11,7 +11,7 @@ EOM'
 
 sudo bash -c 'cat > /etc/systemd/system/blog.timer <<- EOM
 [Unit]
-Description=Check and provision if needed every 10 seconds
+Description=Check and provision if necessary [Every 10 seconds]
 [Timer]
 OnCalendar=*:*:0/5
 Unit=blog.service

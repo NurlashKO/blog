@@ -3,7 +3,7 @@ name: Deploy Provisioner CI
 on:
   push:
     paths:
-      - 'provisioner/**'
+      - 'microservices/provisioner/**'
   workflow_dispatch:
 jobs:
 
