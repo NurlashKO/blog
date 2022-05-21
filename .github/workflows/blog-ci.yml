@@ -1,4 +1,4 @@
-name: Deploy Blog CI
+name: Blog CI
 
 on:
   push:

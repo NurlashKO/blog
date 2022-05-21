@@ -1,4 +1,4 @@
-name: Deploy Provisioner CI
+name: Provisioner CI
 
 on:
   push:

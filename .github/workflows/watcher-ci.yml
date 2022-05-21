@@ -1,4 +1,4 @@
-name: Deploy Watcher CI
+name: Watcher CI
 
 on:
   push:
