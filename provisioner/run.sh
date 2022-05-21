@@ -20,13 +20,12 @@ docker network create internal
 # Setup filesystem shared with microservices
 mkdir -p data
 
-# Deploy container watcher
+# Deploy microservices
 docker run $(DOCKER_DEFAULT_ARGS watcher) \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v $(pwd)/.docker/config.json:/config.json \
-    containrrr/watchtower --include-stopped --revive-stopped --cleanup --interval 5
+    gcr.io/kouzoh-p-nurlashko/nurlashko/watcher
 
-# Deploy microservices
 mkdir -p ./data/certificates && \
   docker run $(DOCKER_DEFAULT_ARGS ingress) \
       -p 80:80 \
