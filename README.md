@@ -18,5 +18,7 @@
 
 [![Grafana CI](https://github.com/NurlashKO/blog/actions/workflows/grafana-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/grafana-ci.yml)
 
+[![Docs CI](https://github.com/NurlashKO/blog/actions/workflows/docs-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/docs-ci.yml)
+
 # blog
 Personal blog project
