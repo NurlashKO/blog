@@ -20,5 +20,8 @@
 
 [![Docs CI](https://github.com/NurlashKO/blog/actions/workflows/docs-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/docs-ci.yml)
 
-# blog
-Personal blog project
+# My Personal Blog
+
+![Untitled drawing (5)](https://user-images.githubusercontent.com/10639020/169705462-f48bc1b2-8883-4b5c-a116-37294ec3c40e.png)
+
+Full documentation can be found here: https://docs.nurlashko.de
