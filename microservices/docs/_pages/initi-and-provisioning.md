@@ -22,7 +22,7 @@ that all `blog.service` does is running `/home/nurlashko/provision/run.sh` and t
 
 Another important task of `init-infra.sh` is starting latest [provisioner](https://github.com/NurlashKO/blog/tree/main/microservices/provisioner) microservice.
 
-This part is pretty tricky, hope you are still with me up until now.
+This part is quite tricky, hope you are still with me up until now.
 
 Provisioner microservice **starts** with `/home/nurlashko/provision/` folder mounted to its `WORKDIR`.
 1. `Provisioner` copies his `run.sh` into mounted directory which pushes this file to a **host filesystem**.
