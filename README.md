@@ -8,5 +8,15 @@
 
 [![Blog CI](https://github.com/NurlashKO/blog/actions/workflows/blog-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/blog-ci.yml)
 
+[![cAdvisor CI](https://github.com/NurlashKO/blog/actions/workflows/cadvisor.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/cadvisor.yml)
+
+[![Promtail CI](https://github.com/NurlashKO/blog/actions/workflows/promtail-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/promtail-ci.yml)
+
+[![Prometheus CI](https://github.com/NurlashKO/blog/actions/workflows/prometheus-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/prometheus-ci.yml)
+
+[![Node Exporter CI](https://github.com/NurlashKO/blog/actions/workflows/node-exporter-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/node-exporter-ci.yml)
+
+[![Grafana CI](https://github.com/NurlashKO/blog/actions/workflows/grafana-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/grafana-ci.yml)
+
 # blog
 Personal blog project
