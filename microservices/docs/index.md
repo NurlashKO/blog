@@ -3,7 +3,7 @@ layout: home
 ---
 
 This documentation provides high level overview of Provisioning and CI/CD processes in
-"My Personal Blog", as well as collection of microservice documentations.
+"My Personal Blog", as well as ~~collection of microservice documentations~~.
 
 ## Infrastructure overview
 

@@ -19,7 +19,7 @@ Here I am going to just introduce you to common practices that exist in this pro
 
 - All requests from `public` to `internal` network pass through `ingress` microservice. Configuration can be found [here](https://github.com/NurlashKO/blog/blob/main/microservices/ingress/nginx.conf).
   
-- All CI workflow located in https://github.com/NurlashKO/blog/tree/main/.github/workflows/{name}-ci.yaml
+- Your CI workflow should located in https://github.com/NurlashKO/blog/tree/main/.github/workflows/{name}-ci.yaml
   - e.g. For blog microservices it is [here](https://github.com/NurlashKO/blog/blob/main/.github/workflows/blog-ci.yml).
   
 - All provisioning configs located in `https://github.com/NurlashKO/blog/blob/main/microservices/provisioner/services/{microservice_name}.sh`
