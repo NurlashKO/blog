@@ -9,7 +9,7 @@ import (
 func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("/templates/index.tmpl")
-	r.GET("/blog", func(c *gin.Context) {
+	r.GET("*", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.tmpl", gin.H{})
 		//c.JSON(200, gin.H{
 		//	"message": "Hello World!",

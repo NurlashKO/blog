@@ -1,4 +1,4 @@
-name: Blog CI
+name: Docs CI
 
 on:
   push:
