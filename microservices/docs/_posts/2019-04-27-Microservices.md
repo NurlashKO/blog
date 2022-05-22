@@ -17,8 +17,7 @@ but it should be done in microservice's own "context"(repo/subdir), not a common
 
 Here I am going to just introduce you to common practices that exist in this project.
 
-- All requests from public to `internal` network pass through `ingress` microservice.
-  Configuration can be found [here](https://github.com/NurlashKO/blog/blob/main/microservices/ingress/nginx.conf).
+- All requests from `public` to `internal` network pass through `ingress` microservice. Configuration can be found [here](https://github.com/NurlashKO/blog/blob/main/microservices/ingress/nginx.conf).
   
 - All CI workflow located in https://github.com/NurlashKO/blog/tree/main/.github/workflows/{name}-ci.yaml
   - e.g. For blog microservices it is [here](https://github.com/NurlashKO/blog/blob/main/.github/workflows/blog-ci.yml).
@@ -28,12 +27,12 @@ Here I am going to just introduce you to common practices that exist in this pro
   - This script is going to be sourced by `provisioner`'s [run.sh](https://github.com/NurlashKO/blog/blob/main/microservices/provisioner/run.sh#L23) here.
   
 You might notice that everything on this page can go outdated as well and that's OK.
-It is just 1 page, not 10 microservices.
+It is just 1 page update, not 10 individual microservices.
 
 To step aside from My Personal Blog.
-Microservices are for big companies.
+Microservices are for big corporations.
 Changes above will probably be reviewed by different departments at your company.
-You might need permission from security team to register DNS entry,
+You might need permission from security team to register DNS entries,
 ask help from CI/CD folks to help you with building pipeline, discuss with SRE about how to setup monitoring/alerting and etc.
 
 Everything here is IMHO.

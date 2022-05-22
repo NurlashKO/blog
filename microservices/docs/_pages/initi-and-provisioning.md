@@ -27,9 +27,9 @@ This part is quite tricky, hope you are still with me up until now.
 Provisioner microservice **starts** with `/home/nurlashko/provision/` folder mounted to its `WORKDIR`.
 1. `Provisioner` copies his `run.sh` into mounted directory which pushes this file to a **host filesystem**.
 2. On the host filesystem, `blog.service` eventually finds this file and executes it.
-3. If provisioning finishes with success, `blog.service` deletes this file, which prevents it from re-provisioning it indefinitely.
+3. If provisioning finishes with success, `blog.service` deletes this file, which prevents it from keep re-provisioning it indefinitely.
 
-In other words, `provisioner` microservice here is being used as a package delivery service.
+In other words, `provisioner` microservice here is being used as a package delivery task.
 
 This workflow especially powerful when combined with `Watcher` microservice.
 
