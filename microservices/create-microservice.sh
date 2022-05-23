@@ -35,8 +35,12 @@ create_microservice() {
 xit
 eof
   # Add to git tracking
-  git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md"
-  [[ -z $(git status -s) ]] && git commit -m "Added $mcs microservice"
+  if [[ $(git diff --stat) != '' ]]; then
+    git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md"
+  else
+    git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md" && \
+    git commit -m "Added $mcs microservice"
+  fi
 }
 
 
