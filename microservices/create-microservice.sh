@@ -14,6 +14,10 @@ Review locally, then push to github for CI pipelines to apply your changes.
 create_microservice() {
   local mcs=$1
   local mcs_dir="$SCRIPT_DIR/$mcs"
+  # If git tree is clean then it is okay to commit.
+  local SHOULD_GIT_COMMIT="true"
+  git diff --quiet || SHOULD_GIT_COMMIT="false"
+
   if [ -d "$mcs_dir" ]
   then
     echo "Directory $mcs_dir already exist. Skipping creation."
@@ -35,12 +39,8 @@ create_microservice() {
 xit
 eof
   # Add to git tracking
-  if [[ $(git diff --stat) != '' ]]; then
-    git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md"
-  else
-    git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md" && \
-    git commit -m "Added $mcs microservice"
-  fi
+  git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md" && \
+  [[ $SHOULD_GIT_COMMIT == "true" ]] && git commit -m "Added $mcs microservice"
 }
 
 
