@@ -36,6 +36,7 @@ xit
 eof
   # Add to git tracking
   git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md"
+  [[ -z $(git status -s) ]] && git commit -m "Added $mcs microservice"
 }
 
 
