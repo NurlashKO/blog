@@ -25,8 +25,17 @@ create_microservice() {
   grep -rl "$SCRATCH_MCS" "$mcs_dir" | xargs sed -i "" -e "s/$SCRATCH_MCS/$mcs/g"
   # Move CI workflow config to .github folder
   mv "${mcs_dir}/${SCRATCH_MCS}-ci.yml" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml"
+  # Prompt description
+  read -p "Write 3-5 word description: " description
+  # Add status badge
+  ex "$SCRIPT_DIR/../README.md" <<eof
+3 insert
+[![$mcs CI](https://github.com/NurlashKO/blog/actions/workflows/$mcs-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/$mcs-ci.yml)|$description
+.
+xit
+eof
   # Add to git tracking
-  git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml"
+  git add "$mcs_dir" "${SCRIPT_DIR}/../.github/workflows/${mcs}-ci.yml" "$SCRIPT_DIR/../README.md"
 }
 
 
