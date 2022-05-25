@@ -2,7 +2,7 @@ ui = true
 
 listener "tcp" {
   tls_disable = 1
-  address = "127.0.0.1:8200"
+  address = "0.0.0.0:8200"
 }
 
 storage "file" {
