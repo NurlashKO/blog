@@ -2,4 +2,4 @@ FROM vault:1.10.3
 
 COPY src/config /vault/config
 
-ENTRYPOINT vault server
+CMD ["server", "-config", "/vault/config"]
