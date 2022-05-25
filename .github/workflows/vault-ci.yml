@@ -1,0 +1,23 @@
+name: vault CI
+
+on:
+  push:
+    paths:
+      - 'microservices/vault/**'
+  workflow_dispatch:
+jobs:
+
+  build-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build microservices/vault -t gcr.io/kouzoh-p-nurlashko/nurlashko/vault
+    - name: Push the Docker image
+      env:
+        CR_LOGIN: ${{ secrets.CR_LOGIN }}
+        CR_PASS: ${{ secrets.CR_PASS }}
+      run: |
+        echo "$CR_PASS" | docker login --username="$CR_LOGIN" --password-stdin https://gcr.io    
+        docker push gcr.io/kouzoh-p-nurlashko/nurlashko/vault
