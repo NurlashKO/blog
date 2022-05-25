@@ -11,7 +11,6 @@ DOCKER_DEFAULT_ARGS() {
 
 # Choose microservices to re-provision
 RESTART=(
-ingress
 vault
 # Everything
 # `docker ps -f "label=$PROVISIONER_MARK" -q`
