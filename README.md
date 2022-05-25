@@ -1,7 +1,7 @@
 | Microservice | Description |
 |--------------|-------------|
 [![vault CI](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml)|Tool for securely storing and accessing secrets
-[![Provisioner CI](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml) | Combines all provisioning scripts.
+[![Provisioner CI](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml) | Combines all provisioning scripts. Used as versioned package delivery.
 [![Watcher CI](https://github.com/NurlashKO/blog/actions/workflows/watcher-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/watcher-ci.yml) | Pulls then restarts microservice when new version is available
 [![Ingress CI](https://github.com/NurlashKO/blog/actions/workflows/ingress-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/ingress-ci.yml) | All requests from `public` to `internal` network pass through here
 [![Loki CI](https://github.com/NurlashKO/blog/actions/workflows/loki-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/loki-ci.yml) | Logs aggregator. Collects logs from both containers and machine host 
