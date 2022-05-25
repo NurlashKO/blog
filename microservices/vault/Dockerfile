@@ -1,4 +1,5 @@
 FROM scratch
 
-WORKDIR /opt/vault
-COPY src .
+COPY src/config /vault/config
+
+CMD server
