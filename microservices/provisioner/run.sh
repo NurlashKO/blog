@@ -29,3 +29,5 @@ mkdir -p credentials
 
 # Provision microservices
 source <(cat provision/services/*)
+
+exit 0
