@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd /home/nurlashko
 
@@ -13,7 +13,7 @@ DOCKER_DEFAULT_ARGS() {
 RESTART=(
 blog
 # Everything
-# `docker ps -q`
+# `docker ps -f "label=$PROVISIONER_MARK" -q`
 )
 docker kill $"${RESTART[@]}"
 
