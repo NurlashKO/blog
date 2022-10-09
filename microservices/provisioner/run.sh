@@ -13,7 +13,7 @@ DOCKER_DEFAULT_ARGS() {
 RESTART=(
 vault
 # Everything
-# `docker ps -f "label=$PROVISIONER_MARK" -q`
+ `docker ps -f "label=$PROVISIONER_MARK" -q`
 )
 docker kill $"${RESTART[@]}"
 
