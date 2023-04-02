@@ -14,9 +14,9 @@ func main() {
 		//c.JSON(200, gin.H{
 		//	"message": "Hello World!",
 		//	"source code": "https://github.com/NurlashKO/blog",
-		//	"docs": "https://docs.nurlashko.de",
-		//	"grafana": "https://grafana.nurlashko.de",
-		//	"prometheus": "https://prometheus.nurlashko.de",
+		//	"docs": "https://docs.nurlashko.dev",
+		//	"grafana": "https://grafana.nurlashko.dev",
+		//	"prometheus": "https://prometheus.nurlashko.dev",
 		//})
 	})
 	r.Run(":8000") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")

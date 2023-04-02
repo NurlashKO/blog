@@ -1,4 +1,4 @@
-module nurlashko.de/blog
+module nurlashko.dev/blog
 
 go 1.18
 

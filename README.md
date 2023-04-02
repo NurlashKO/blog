@@ -17,4 +17,4 @@
 
 ![Untitled drawing (5)](https://user-images.githubusercontent.com/10639020/169705462-f48bc1b2-8883-4b5c-a116-37294ec3c40e.png)
 
-Full documentation can be found here: https://docs.nurlashko.de
+Full documentation can be found here: https://docs.nurlashko.dev
