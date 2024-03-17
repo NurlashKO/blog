@@ -27,10 +27,5 @@ jobs:
       - name: Build the Docker image
         run: docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog
       - name: Push the Docker image
-        env:
-          CR_LOGIN: ${{ secrets.CR_LOGIN }}
-          CR_PASS: ${{ secrets.CR_PASS }}
-        run: |
-          echo "$CR_PASS" | docker login --username="$CR_LOGIN" --password-stdin https://gcr.io    
-          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/blog
+        run: docker push gcr.io/kouzoh-p-nurlashko/nurlashko/blog
   
