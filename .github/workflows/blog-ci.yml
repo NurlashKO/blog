@@ -17,13 +17,15 @@ jobs:
       - uses: 'actions/checkout@v4'
 
       - uses: 'google-github-actions/auth@v2'
+        id: auth
         with:
           project_id: 'kouzoh-p-nurlashko'
           workload_identity_provider: 'projects/5480347068/locations/global/workloadIdentityPools/github/providers/my-repo'
+          service_account_email: 'blog-ci@kouzoh-p-nurlashko.iam.gserviceaccount.com'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
       - name: 'Configure Docker'
-        run: gcloud auth print-access-token --project=kouzoh-p-nurlashko | docker login -u oauth2accesstoken --password-stdin https://gcr.io
+        run: gcloud auth configure-docker
       - name: Build the Docker image
         run: docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog
       - name: Push the Docker image
