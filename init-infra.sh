@@ -19,6 +19,17 @@ Unit=blog.service
 WantedBy=default.target
 EOM'
 
+sudo bash -c 'cat <<EOF > /etc/docker/daemon.json
+{
+  "live-restore": true,
+  "storage-driver": "overlay2",
+  "log-opts": {
+    "max-size": "1024m"
+  }
+}
+EOF'
+sudo systemctl restart docker
+
 sudo systemctl enable /etc/systemd/system/blog.timer
 sudo systemctl start blog.timer
 
