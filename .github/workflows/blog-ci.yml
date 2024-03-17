@@ -21,7 +21,7 @@ jobs:
         with:
           project_id: 'kouzoh-p-nurlashko'
           workload_identity_provider: 'projects/5480347068/locations/global/workloadIdentityPools/github/providers/my-repo'
-          service_account_email: 'blog-ci@kouzoh-p-nurlashko.iam.gserviceaccount.com'
+          service_account: 'blog-ci@kouzoh-p-nurlashko.iam.gserviceaccount.com'
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'
       - name: 'Configure Docker'
