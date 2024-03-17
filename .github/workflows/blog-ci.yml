@@ -6,28 +6,16 @@ on:
       - 'microservices/blog/**'
   workflow_dispatch:
 jobs:
-
   build-push:
+    runs-on: ubuntu-latest
     permissions:
       contents: 'read'
       id-token: 'write'
-    runs-on: ubuntu-latest
 
     steps:
       - uses: 'actions/checkout@v4'
-
-      - uses: 'google-github-actions/auth@v2'
-        id: auth
-        with:
-          project_id: 'kouzoh-p-nurlashko'
-          workload_identity_provider: 'projects/5480347068/locations/global/workloadIdentityPools/github/providers/my-repo'
-          service_account: 'blog-ci@kouzoh-p-nurlashko.iam.gserviceaccount.com'
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
-      - name: 'Configure Docker'
-        run: gcloud auth configure-docker
-      - name: Build the Docker image
-        run: docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog
-      - name: Push the Docker image
-        run: docker push gcr.io/kouzoh-p-nurlashko/nurlashko/blog
-  
+      - uses: '.github/workflows/shared/setup-docker-credentials@main'
+      - name: Build && Push Docker image
+        run: |
+          docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog
+          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/blog
