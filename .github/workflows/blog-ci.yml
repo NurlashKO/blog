@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v4'
       - name: Setup Docker Credentials
-        uses: './.github/actions/setup-docker-credentials'
+        uses: '.github/actions/setup-docker-credentials'
       - name: Build && Push Docker image
         run: |
           docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog

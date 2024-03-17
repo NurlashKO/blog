@@ -1,9 +1,8 @@
-"""
-Workflow should have permissions below
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-"""
+# REQUIRED
+#    permissions:
+#      contents: 'read'
+#      id-token: 'write'
+
 name: "Setup Docker Credentials"
 runs:
   using: "composite"
