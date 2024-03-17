@@ -5,20 +5,20 @@ on:
     paths:
       - 'microservices/loki/**'
   workflow_dispatch:
+env:
+  MICROSERVICE: loki
 jobs:
-
   build-push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build microservices/loki -t gcr.io/kouzoh-p-nurlashko/nurlashko/loki
-    - name: Push the Docker image
-      env:
-        CR_LOGIN: ${{ secrets.CR_LOGIN }}
-        CR_PASS: ${{ secrets.CR_PASS }}
-      run: |
-        echo "$CR_PASS" | docker login --username="$CR_LOGIN" --password-stdin https://gcr.io    
-        docker push gcr.io/kouzoh-p-nurlashko/nurlashko/loki
-  
+      - uses: 'actions/checkout@v4'
+      - name: Setup Docker Credentials
+        uses: 'NurlashKO/blog/.github/actions/setup-docker-credentials@main'
+      - name: Build && Push Docker image
+        run: |
+          docker build microservices/$MICROSERVICE -t gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE
+          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE

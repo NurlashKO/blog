@@ -5,6 +5,8 @@ on:
     paths:
       - 'microservices/blog/**'
   workflow_dispatch:
+env:
+  MICROSERVICE: blog
 jobs:
   build-push:
     runs-on: ubuntu-latest
@@ -18,5 +20,5 @@ jobs:
         uses: 'NurlashKO/blog/.github/actions/setup-docker-credentials@main'
       - name: Build && Push Docker image
         run: |
-          docker build microservices/blog -t gcr.io/kouzoh-p-nurlashko/nurlashko/blog
-          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/blog
+          docker build microservices/$MICROSERVICE -t gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE
+          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE
