@@ -1,4 +1,4 @@
-FROM golang:1.18-buster as builder
+FROM golang:1.22.1-buster as builder
 
 ENV CGO_ENABLED 0
 
@@ -8,7 +8,7 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 COPY . .
-RUN go build -v -o /app ./...
+RUN go build -v -o /app ./cmd/...
 
 
 FROM debian:buster-slim
