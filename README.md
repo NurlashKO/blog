@@ -1,5 +1,6 @@
 | Microservice | Description |
 |--------------|-------------|
+[![database CI](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml)|Persistant storage for data like blog posts
 [![vault CI](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml)|Tool for securely storing and accessing secrets
 [![Provisioner CI](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml) | Combines all provisioning scripts. Used as versioned package delivery.
 [![Watcher CI](https://github.com/NurlashKO/blog/actions/workflows/watcher-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/watcher-ci.yml) | Pulls then restarts microservice when new version is available

@@ -1,12 +1,12 @@
-name: Scratch CI
+name: Database CI
 
 on:
   push:
     paths:
-      - 'microservices/_scratch/**'
+      - 'microservices/database/**'
   workflow_dispatch:
 env:
-  MICROSERVICE: _scratch
+  MICROSERVICE: database
 jobs:
   build-push:
     runs-on: ubuntu-latest
