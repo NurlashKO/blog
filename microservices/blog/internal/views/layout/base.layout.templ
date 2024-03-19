@@ -4,20 +4,32 @@ templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="dark">
 		<head>
+		    <title> { title } </title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <style type="text/css">
                 body {
                     margin: 40px auto;
+                    margin-bottom: 0px;
+                    min-height: calc(100vh - 40px);
                     max-width: 650px;
                     line-height: 1.6;
                     font-size: 18px;
                     color: #444;
-                    padding: 0 10px
+                    padding: 0 10px;
+                    display:flex;
+                    flex-direction:column;
                 }
-
+                main {
+                    flex: 1;
+                }
                 h1,h2,h3 {
                     line-height: 1.2
+                }
+
+                footer {
+                    min-height:50px; background:PapayaWhip;
+                    float: bottom;
                 }
             </style>
 		</head>
@@ -25,6 +37,8 @@ templ Base(title string) {
 			<main class="pt-40">
 				{ children... }
 			</main>
+
+			<footer> <ul> <li> name 1 </li>  <li> name 2 </li>  <li> name 3 </li></ul> </footer>
 		</body>
 	</html>
 }
