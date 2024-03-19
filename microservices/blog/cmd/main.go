@@ -55,6 +55,24 @@ func main() {
 		}
 	})
 
+	mux.HandleFunc("/article", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPost {
+			title := r.FormValue("title")
+			content := r.FormValue("content")
+			if len(title)+len(content) == 0 {
+				http.Error(w, "Title is too short", http.StatusBadRequest)
+				return
+			}
+			err := am.Insert(title, content)
+			if err != nil {
+				http.Error(w,
+					fmt.Sprintf("failed to insert article: %s", err.Error()), http.StatusBadRequest)
+				return
+			}
+			_ = article.CreateArticle(false).Render(r.Context(), w)
+		}
+	})
+
 	fmt.Println("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {
 		log.Printf("error listening: %v", err)

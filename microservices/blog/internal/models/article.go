@@ -33,3 +33,8 @@ func (m *ArticleModel) All() ([]Article, error) {
 	}
 	return articles, nil
 }
+
+func (m *ArticleModel) Insert(title, content string) error {
+	_, err := m.DB.Exec("INSERT INTO article (title, content) VALUES ($1, $2)", title, content)
+	return err
+}

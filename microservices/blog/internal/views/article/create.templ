@@ -6,11 +6,11 @@ import "time"
 templ CreateArticle(toggle bool) {
         if !toggle {
             <div id="submenu">
-                <button hx-target="#submenu" hx-get="/article/create?toggle=true" style="font-size: smaller;"> Create Post </button>
+                <a href="#" hx-target="#submenu" hx-get="/article/create?toggle=true" style="font-size: smaller;"> ✍️ Add Post </a>
             </div>
         } else {
             <div id="article_form">
-                <form hx-post="/article" method="get">
+                <form hx-target="#article_form" hx-post="/article" method="post">
                   <input type="button" hx-target="#article_form" hx-get="/article/create?toggle=false" value="Close"/>
                   <input type="submit" value="Submit"/>
                   <br/>
@@ -18,6 +18,7 @@ templ CreateArticle(toggle bool) {
                          hx-trigger="input changed delay:500ms, title"
                          hx-target="#preview"
                          hx-post="/article/preview"
+                         style="width: 100%;"
                   /><br/>
                   <textarea placeholder="Content" type="text" id="content" name="content"
                          hx-trigger="input changed delay:500ms, content"
@@ -28,7 +29,7 @@ templ CreateArticle(toggle bool) {
                   />
                 </form>
 
-                <p style="margin-top:8px; font-style: italic; margin-bottom:-12px">Preview</p>
+                <p style="margin-top:0px; font-style: italic; margin-bottom:-12px">Preview</p>
                 <div style="background-color: azure">
                     <div id="preview">
                         @ArticleRow(models.Article{
