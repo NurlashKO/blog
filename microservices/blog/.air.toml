@@ -3,8 +3,7 @@ testdata_dir = "testdata"
 tmp_dir = "tmp"
 
 [build]
-  args_bin = []
-  bin = "./tmp/main"
+  full_bin = "DEBUG=true ./tmp/main"
   cmd = "templ generate && go build -o ./tmp/main cmd/main.go"
   delay = 1000
   exclude_dir = ["assets", "tmp", "vendor", "testdata"]
@@ -12,7 +11,6 @@ tmp_dir = "tmp"
   exclude_regex = [".*_templ.go", "_test.go"]
   exclude_unchanged = false
   follow_symlink = false
-  full_bin = ""
   include_dir = []
   include_ext = ["go", "tpl", "templ", "tmpl", "html"]
   include_file = []

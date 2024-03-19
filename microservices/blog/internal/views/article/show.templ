@@ -9,16 +9,19 @@ templ ShowIndex(articles []models.Article) {
         <div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.min.js" integrity="sha512-sl01o/gVwybF1FNzqO4NDRDNPJDupfN0o2+tMm4K2/nr35FjGlxlvXZ6kK6faa9zhXbnfLIXioHnExuwJdlTMA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.4.1/jquery.timeago.min.js"></script>
-            <h1>Posts</h1>
-            <ul>
+            <h1 style="margin-bottom:2px;">NurlashKO's Blog</h1>
+                <a href="" style="font-size: smaller;"> Create Post </a>
+                <hr style="margin-top:24px; opacity: 0.4"></hr>
                 for _, article := range articles {
-                    <li>
-                        <h3>{ article.Title }</h3>
+                    <div>
+                        <h3 style="margin-top:8px;">
+                            { article.Title }
+                            <p style="opacity: 0.7; font-style:italic; font-size: small; margin-top: 0px">{ timeago.English.Format(article.CreatedAt) }</p>
+                        </h3>
                         <p>{ article.Content }</p>
-                        <p> { timeago.English.Format(article.CreatedAt) }</p>
-                    </li>
+                        <hr style=" opacity: 0.4" ></hr>
+                    </div>
                 }
-            </ul>
         </div>
 	}
 }

@@ -5,17 +5,28 @@ import (
 	"log"
 	"net/http"
 
+	"nurlashko.dev/blog/internal"
 	"nurlashko.dev/blog/internal/client"
 	"nurlashko.dev/blog/internal/models"
 	"nurlashko.dev/blog/internal/views/article"
 )
 
 func main() {
-	am := models.ArticleModel{DB: client.GetDB()}
+	config, err := internal.ParseConfig()
+	if err != nil {
+		log.Fatalf("error parsing config: %v", err)
+	}
+	am := models.ArticleModel{DB: client.GetDB(config)}
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		x, _ := am.All()
-		_ = article.ShowIndex(x).Render(r.Context(), w)
+		x, err := am.All()
+		if err != nil {
+			log.Printf("error fetching articles: %v", err)
+		}
+		err = article.ShowIndex(x).Render(r.Context(), w)
+		if err != nil {
+			log.Printf("error rendering: %v", err)
+		}
 	})
 
 	fmt.Println("Listening on :8000")
