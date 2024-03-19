@@ -8,3 +8,10 @@ listener "tcp" {
 storage "file" {
   path = "/vault/file"
 }
+auth {
+  github {
+    authconfig = {
+      organization = "NurlashKO"
+    }
+  }
+}
