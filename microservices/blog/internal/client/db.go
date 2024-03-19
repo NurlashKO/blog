@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	connectionString = "postgres://nurlashko:tmp@localhost:5432/blog?sslmode=disable"
+	connectionString = "postgres://nurlashko:tmp@postgres:5432/blog?sslmode=disable"
 )
 
 func GetDB() *sql.DB {
