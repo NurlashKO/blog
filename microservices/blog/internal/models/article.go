@@ -17,7 +17,7 @@ type ArticleModel struct {
 }
 
 func (m *ArticleModel) All() ([]Article, error) {
-	rows, err := m.DB.Query("SELECT * FROM article")
+	rows, err := m.DB.Query("SELECT * FROM article ORDER BY created_at DESC")
 	if err != nil {
 		return nil, err
 	}
