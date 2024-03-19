@@ -19,7 +19,7 @@ func main() {
 	})
 
 	fmt.Println("Listening on :8000")
-	if err := http.ListenAndServe("localhost:8000", mux); err != nil {
+	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {
 		log.Printf("error listening: %v", err)
 	}
 }
