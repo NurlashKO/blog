@@ -1,0 +1,18 @@
+package article
+
+import "nurlashko.dev/blog/internal/models"
+import "github.com/xeonx/timeago"
+import "strconv"
+
+templ ArticleRow(article models.Article) {
+    <div>
+        <hr style=" opacity: 0.4" ></hr>
+        <div style="padding-left:8px; padding-right:8px">
+            <h3 style="margin-top:8px; margin-bottom: 0px; padding-bottom: 8px">
+                <p style="opacity: 0.7; font-style:italic; font-size: small; margin: 0px;">#{strconv.Itoa(article.ID)} | Time: { timeago.English.Format(article.CreatedAt) } </p>
+                { article.Title }
+            </h3>
+            <p style="margin-left:8px; margin-top: 0px; white-space: pre-wrap;">{ article.Content }</p>
+        </div>
+    </div>
+}

@@ -28,17 +28,40 @@ templ Base(title string) {
                 }
 
                 footer {
-                    min-height:50px; background:PapayaWhip;
+                    min-height:50px;
                     float: bottom;
                 }
+                #footer-links {
+                    list-style-position: inside;
+                    padding-right: 40px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: space-between;
+                }
+                #footer-links li {
+                    flex: 1 1 33%;
+                }
             </style>
+            <script src="https://unpkg.com/htmx.org@1.9.11"></script>
 		</head>
 		<body class="sample-transition" hx-boost="true">
+            <h1 style="margin:0px;">{ title } </h1>
 			<main class="pt-40">
 				{ children... }
 			</main>
 
-			<footer> <ul> <li> name 1 </li>  <li> name 2 </li>  <li> name 3 </li></ul> </footer>
+			<footer>
+			    <h5 style="margin-bottom:8px">Useful Links</h5>
+			    <hr></hr>
+			    <ul id="footer-links">
+                    <li> <a href="https://blog.nurlashko.dev"> Blog </a></li>
+                    <li> <a href="https://github.com/NurlashKO/blog"> Source Code </a></li>
+                    <li> <a href="https://docs.nurlashko.dev"> Documentation </a></li>
+                    <li> <a href="https://grafana.nurlashko.dev"> Grafana </a></li>
+                    <li> <a href="https://prometheus.nurlashko.dev"> Prometheus </a></li>
+                    <li> <a href="https://vault.nurlashko.dev"> Vault </a></li>
+                 </ul>
+            </footer>
 		</body>
 	</html>
 }

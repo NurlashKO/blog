@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"nurlashko.dev/blog/internal"
 	"nurlashko.dev/blog/internal/client"
@@ -16,14 +17,39 @@ func main() {
 	if err != nil {
 		log.Fatalf("error parsing config: %v", err)
 	}
-	am := models.ArticleModel{DB: client.GetDB(config)}
 	mux := http.NewServeMux()
+
+	am := models.ArticleModel{DB: client.GetDB(config)}
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		x, err := am.All()
+		articles, err := am.All()
 		if err != nil {
 			log.Printf("error fetching articles: %v", err)
 		}
-		err = article.ShowIndex(x).Render(r.Context(), w)
+		err = article.ShowIndex(articles).Render(r.Context(), w)
+		if err != nil {
+			log.Printf("error rendering: %v", err)
+		}
+	})
+
+	mux.HandleFunc("/article/create", func(w http.ResponseWriter, r *http.Request) {
+		toggle := false
+		if r.URL.Query().Get("toggle") == "true" {
+			toggle = true
+		}
+		err = article.CreateArticle(toggle).Render(r.Context(), w)
+		if err != nil {
+			log.Printf("error rendering: %v", err)
+		}
+	})
+
+	mux.HandleFunc("/article/preview", func(w http.ResponseWriter, r *http.Request) {
+		preview := models.Article{
+			ID:        42,
+			Title:     r.FormValue("title"),
+			Content:   r.FormValue("content"),
+			CreatedAt: time.Now(),
+		}
+		err = article.ArticleRow(preview).Render(r.Context(), w)
 		if err != nil {
 			log.Printf("error rendering: %v", err)
 		}

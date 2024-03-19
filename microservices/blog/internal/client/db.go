@@ -2,7 +2,6 @@ package client
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/lib/pq"
 	"nurlashko.dev/blog/internal"
@@ -18,7 +17,6 @@ func GetDB(config internal.Config) *sql.DB {
 	if config.Debug {
 		connectionString = connectionStringLocal
 	}
-	fmt.Println(connectionString)
 	db, err := sql.Open("postgres", connectionString)
 	if err != nil {
 		panic(err)
