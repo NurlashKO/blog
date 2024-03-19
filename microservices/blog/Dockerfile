@@ -1,6 +1,11 @@
-FROM golang:1.22.1-buster as builder
+FROM golang:1.22.1-bookworm as builder
 
 ENV CGO_ENABLED 0
+
+RUN apt update && \
+    apt install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    update-ca-certificates
 
 WORKDIR /opt/blog
 
@@ -8,15 +13,11 @@ COPY go.mod go.sum ./
 RUN go mod download && go mod verify
 
 COPY . .
+RUN templ generate
 RUN go build -v -o /app ./cmd/...
 
 
-FROM debian:buster-slim
-
-RUN apt update && \
-    apt install -y --no-install-recommends ca-certificates && \
-    rm -rf /var/lib/apt/lists/* && \
-    update-ca-certificates
+FROM debian:bookworm-slim
 
 COPY --from=builder /app /app
 COPY --from=builder /opt/blog/templates /templates
