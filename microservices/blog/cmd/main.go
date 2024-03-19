@@ -18,8 +18,8 @@ func main() {
 		_ = article.ShowIndex(x).Render(r.Context(), w)
 	})
 
-	fmt.Println("Listening on :3000")
-	if err := http.ListenAndServe("localhost:3000", mux); err != nil {
+	fmt.Println("Listening on :8000")
+	if err := http.ListenAndServe("localhost:8000", mux); err != nil {
 		log.Printf("error listening: %v", err)
 	}
 }
