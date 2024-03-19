@@ -21,6 +21,5 @@ RUN go build -v -o /app ./cmd/...
 FROM debian:bookworm-slim
 
 COPY --from=builder /app /app
-COPY --from=builder /opt/blog/templates /templates
 
 CMD ["/app"]
