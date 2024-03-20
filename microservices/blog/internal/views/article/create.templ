@@ -31,13 +31,13 @@ templ CreateArticle(toggle bool) {
                          hx-trigger="input changed delay:500ms, title"
                          hx-target="#preview"
                          hx-post="/article/preview"
-                         style="width: 100%;"
+                         style="width: calc(100% - 7px);"
                   /><br/>
                   <textarea placeholder="Content" type="text" id="content" name="content"
                          hx-trigger="input changed delay:500ms, content"
                          hx-target="#preview"
                          hx-post="/article/preview"
-                         style="width: 100%;"
+                         style="width: calc(100% - 5px);"
                          rows="4"
                   />
                 </form>
