@@ -8,8 +8,10 @@ import (
 
 	"nurlashko.dev/blog/internal"
 	"nurlashko.dev/blog/internal/client"
+	"nurlashko.dev/blog/internal/middleware"
 	"nurlashko.dev/blog/internal/models"
 	"nurlashko.dev/blog/internal/views/article"
+	"nurlashko.dev/blog/internal/views/user"
 )
 
 func main() {
@@ -20,6 +22,8 @@ func main() {
 	mux := http.NewServeMux()
 
 	am := models.ArticleModel{DB: client.GetDB(config)}
+	auth := client.NewAuthClient()
+
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		articles, err := am.All()
 		if err != nil {
@@ -55,12 +59,12 @@ func main() {
 		}
 	})
 
-	mux.HandleFunc("/article", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/article", middleware.AuthenticationMiddleware(auth, func(w http.ResponseWriter, r *http.Request) {
 		if r.Method == http.MethodPost {
 			title := r.FormValue("title")
 			content := r.FormValue("content")
-			if len(title)+len(content) == 0 {
-				http.Error(w, "Title is too short", http.StatusBadRequest)
+			if len(title) == 0 {
+				http.Error(w, "Error: title is too short", http.StatusBadRequest)
 				return
 			}
 			err := am.Insert(title, content)
@@ -70,6 +74,30 @@ func main() {
 				return
 			}
 			_ = article.CreateArticle(false).Render(r.Context(), w)
+		}
+	}))
+
+	mux.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == "GET" {
+			err := user.LoginModal().Render(r.Context(), w)
+			if err != nil {
+				log.Printf("error rendering: %v", err)
+			}
+		} else {
+			ghToken := r.FormValue("gh_token")
+			token, err := auth.GetClientToken(ghToken)
+			if err != nil {
+				http.Error(w, "failed to get token ", http.StatusUnauthorized)
+				return
+			}
+			http.SetCookie(w, &http.Cookie{
+				Name:     "x-auth-token",
+				Value:    token,
+				Secure:   true,
+				HttpOnly: true,
+				SameSite: http.SameSiteLaxMode,
+			})
+			w.WriteHeader(http.StatusOK)
 		}
 	})
 

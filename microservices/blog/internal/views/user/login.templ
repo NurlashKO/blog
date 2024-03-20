@@ -1,0 +1,10 @@
+package user
+
+templ Login() {
+    <div
+        hx-get="/login"
+        hx-target="body"
+        hx-trigger="trigger-login from:body"
+        hx-swap="beforeend"
+    ></div>
+}

@@ -1,5 +1,7 @@
 package layout
 
+import "nurlashko.dev/blog/internal/views/user"
+
 templ Base(title string) {
 	<!DOCTYPE html>
 	<html lang="en" data-theme="dark">
@@ -45,12 +47,12 @@ templ Base(title string) {
             </style>
             <script src="https://unpkg.com/htmx.org@1.9.11"></script>
 		</head>
-		<body class="sample-transition" hx-boost="true">
+		<body hx-boost="true">
+		    @user.Login()
             <h1 style="margin:0px;">{ title } </h1>
 			<main class="pt-40">
 				{ children... }
 			</main>
-
 			<footer>
 			    <h5 style="margin-bottom:8px">Useful Links</h5>
 			    <hr></hr>
