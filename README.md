@@ -1,5 +1,6 @@
 | Microservice | Description |
 |--------------|-------------|
+[![statika CI](https://github.com/NurlashKO/blog/actions/workflows/statika-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/statika-ci.yml)|Web interface to manage server static files
 [![database CI](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml)|Persistant storage for data like blog posts
 [![vault CI](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/vault-ci.yml)|Tool for securely storing and accessing secrets
 [![Provisioner CI](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/provisioner-ci.yml) | Combines all provisioning scripts. Used as versioned package delivery.

@@ -23,11 +23,13 @@ templ LoginModal() {
     		<h1>Action requires authorization</h1>
     		Enter your github token:
     		<br/>
-    		<input form="login_form" autocomplete="off" type="password" name="gh_token" />
+    		<input form="login_form" autocomplete="off" type="password" size="25" name="gh_token" />
     		<br/>
     		<div id="login_error" style="color: red;"></div>
     		<br/>
-    		<form hx-post="/login" hx-target="this" hx-swap="none" id="login_form" style="display: inline;margin-right: 8px;">
+    		<form hx-post="/login" hx-target="this" hx-swap="none"
+    		        id="login_form" style="display: inline;margin-right: 8px;"
+    		        autocomplete="off" >
                     <button id="login_btn">Login</button>
     		</form>
     		<button onclick="CloseModal()" >Close</button>

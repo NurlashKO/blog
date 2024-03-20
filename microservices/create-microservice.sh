@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage() {
-  echo "Usage: $(basename $0) [--gen-resources] <your mcs name>
+  echo "Usage: $(basename $0) <your mcs name>
 
 This script creates:
 - \"scratch\" mcs with specified <your mcs name> in microservices folder.

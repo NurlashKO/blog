@@ -26,7 +26,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	am := models.ArticleModel{DB: client.GetDB(config)}
-	auth := client.NewAuthClient(config)
+	auth := client.NewAuthClient()
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		articles, err := am.All()
