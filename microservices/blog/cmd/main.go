@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
+	"log/slog"
 	"net/http"
+	"os"
 	"time"
 
 	"nurlashko.dev/blog/internal"
@@ -16,6 +18,8 @@ import (
 
 func main() {
 	config, err := internal.ParseConfig()
+	slog.SetDefault(slog.New(slog.NewJSONHandler(os.Stdout, nil)))
+
 	if err != nil {
 		log.Fatalf("error parsing config: %v", err)
 	}
@@ -27,11 +31,11 @@ func main() {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		articles, err := am.All()
 		if err != nil {
-			log.Printf("error fetching articles: %v", err)
+			slog.Info("error fetching articles: %v", err)
 		}
 		err = article.ShowIndex(articles).Render(r.Context(), w)
 		if err != nil {
-			log.Printf("error rendering: %v", err)
+			slog.Info("error rendering: %v", err)
 		}
 	})
 
@@ -42,7 +46,7 @@ func main() {
 		}
 		err = article.CreateArticle(toggle).Render(r.Context(), w)
 		if err != nil {
-			log.Printf("error rendering: %v", err)
+			slog.Info("error rendering: %v", err)
 		}
 	})
 
@@ -55,7 +59,7 @@ func main() {
 		}
 		err = article.ArticleRow(preview).Render(r.Context(), w)
 		if err != nil {
-			log.Printf("error rendering: %v", err)
+			slog.Info("error rendering: %v", err)
 		}
 	})
 
@@ -81,13 +85,14 @@ func main() {
 		if r.Method == "GET" {
 			err := user.LoginModal().Render(r.Context(), w)
 			if err != nil {
-				log.Printf("error rendering: %v", err)
+				slog.Error("error rendering: %v", err)
 			}
 		} else {
 			ghToken := r.FormValue("gh_token")
 			token, err := auth.GetClientToken(ghToken)
 			if err != nil {
-				http.Error(w, "failed to get token ", http.StatusUnauthorized)
+				http.Error(w, "failed to get token", http.StatusUnauthorized)
+				slog.Error("failed to get token" + err.Error())
 				return
 			}
 			http.SetCookie(w, &http.Cookie{
@@ -101,8 +106,8 @@ func main() {
 		}
 	})
 
-	fmt.Println("Listening on :8000")
+	slog.Info("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {
-		log.Printf("error listening: %v", err)
+		slog.Error("error listening: %v", err)
 	}
 }
