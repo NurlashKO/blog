@@ -11,7 +11,7 @@ storage "file" {
 auth {
   github {
     authconfig = {
-      organization = "NurlashKO"
+      organization = "N-and-KO"
     }
   }
 }

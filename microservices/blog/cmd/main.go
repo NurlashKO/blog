@@ -26,7 +26,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	am := models.ArticleModel{DB: client.GetDB(config)}
-	auth := client.NewAuthClient()
+	auth := client.NewAuthClient(config)
 
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		articles, err := am.All()
@@ -92,7 +92,7 @@ func main() {
 			token, err := auth.GetClientToken(ghToken)
 			if err != nil {
 				http.Error(w, "failed to get token", http.StatusUnauthorized)
-				slog.Error("failed to get token" + err.Error())
+				slog.Error("failed to get token: " + err.Error())
 				return
 			}
 			http.SetCookie(w, &http.Cookie{
