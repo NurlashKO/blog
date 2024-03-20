@@ -20,6 +20,11 @@ RUN go build -v -o /app ./cmd/...
 
 FROM debian:bookworm-slim
 
+RUN apt update && \
+    apt install -y --no-install-recommends ca-certificates && \
+    rm -rf /var/lib/apt/lists/* && \
+    update-ca-certificates
+
 COPY --from=builder /app /app
 
 EXPOSE 8000

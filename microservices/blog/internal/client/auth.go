@@ -15,7 +15,7 @@ type AuthClient struct {
 
 func NewAuthClient(config internal.Config) *AuthClient {
 	vaultAddr := "http://vault:8200"
-	if config.Debug {
+	if true || config.Debug {
 		vaultAddr = "https://vault.nurlashko.dev"
 	}
 	client, err := vault.New(
