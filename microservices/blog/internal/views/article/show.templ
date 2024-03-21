@@ -4,10 +4,10 @@ import "nurlashko.dev/blog/internal/models"
 import "nurlashko.dev/blog/internal/views/layout"
 
 templ ShowIndex(articles []models.Article) {
-	@layout.Base("NurlashKO's Blog") {
+	@layout.Base("NurlashKO's Blog🐈‍") {
         <div>
             @CreateArticle(false)
-            <p style="font-style: italic;margin-bottom:-12px"> Posts </p>
+            <p style="font-style: italic;margin-bottom:-12px;background-color:#f6f6f6"> Posts </p>
             for i, article := range articles {
                 @ArticleRow(article, i == 0)
             }
