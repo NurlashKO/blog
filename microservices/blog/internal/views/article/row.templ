@@ -13,10 +13,11 @@ templ ArticleRow(article models.Article, isFirst bool) {
         }
         <div style="padding-left:8px; padding-right:8px;">
             <h3 style="margin-top:8px; margin-bottom: 0px; padding-bottom: 8px">
-                <p style="opacity: 0.7; font-style:italic; font-size: small; margin: 0px;">#{strconv.Itoa(article.ID)} | Time: { timeago.English.Format(article.CreatedAt) } </p>
+                <p style="opacity: 0.7; font-size: small; margin: 0px;">
+                <i>#{strconv.Itoa(article.ID)}</i> [<i>{ timeago.English.Format(article.CreatedAt) }</i>] </p>
                 { article.Title }
             </h3>
-            <p style="margin-left:8px; margin-top: 0px; white-space: pre-wrap; word-break: break-word;">
+            <p style="font-size: 14px; padding-left:7px; margin-top: 0px; white-space: pre-wrap; word-break: break-word; border-left: 1px dashed darkgray;">
             { article.Content }</p>
         </div>
     </div>
