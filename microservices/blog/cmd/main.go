@@ -57,7 +57,7 @@ func main() {
 			Content:   r.FormValue("content"),
 			CreatedAt: time.Now(),
 		}
-		err = article.ArticleRow(preview).Render(r.Context(), w)
+		err = article.ArticleRow(preview, true).Render(r.Context(), w)
 		if err != nil {
 			slog.Info("error rendering: %v", err)
 		}

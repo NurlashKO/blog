@@ -8,8 +8,8 @@ templ ShowIndex(articles []models.Article) {
         <div>
             @CreateArticle(false)
             <p style="font-style: italic;margin-bottom:-12px"> Posts </p>
-            for _, article := range articles {
-                @ArticleRow(article)
+            for i, article := range articles {
+                @ArticleRow(article, i == 0)
             }
         </div>
 	}
