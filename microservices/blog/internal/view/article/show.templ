@@ -1,9 +1,9 @@
 package article
 
-import "nurlashko.dev/blog/internal/models"
-import "nurlashko.dev/blog/internal/views/layout"
+import "nurlashko.dev/blog/internal/model"
+import "nurlashko.dev/blog/internal/view/layout"
 
-templ ShowIndex(articles []models.Article) {
+templ ShowIndex(articles []model.Article) {
 	@layout.Base("NurlashKO's Blog🐈‍") {
         <div>
             @CreateArticle(false)

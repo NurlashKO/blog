@@ -1,10 +1,10 @@
 package article
 
-import "nurlashko.dev/blog/internal/models"
+import "nurlashko.dev/blog/internal/model"
 import "github.com/xeonx/timeago"
 import "strconv"
 
-templ ArticleRow(article models.Article, isFirst bool) {
+templ ArticleRow(article model.Article, isFirst bool) {
     <div>
         if isFirst {
             <hr style="border-width: 4px; opacity: 0.4"></hr>

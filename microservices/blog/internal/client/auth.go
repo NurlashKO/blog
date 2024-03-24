@@ -15,7 +15,7 @@ type AuthClient struct {
 func NewAuthClient() *AuthClient {
 	client, err := vault.New(
 		vault.WithAddress("https://vault.nurlashko.dev"),
-		vault.WithRequestTimeout(3*time.Second),
+		vault.WithRequestTimeout(1*time.Second),
 	)
 	if err != nil {
 		panic(err)

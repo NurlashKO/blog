@@ -1,0 +1,38 @@
+package handler
+
+import (
+	"log/slog"
+	"net/http"
+
+	"nurlashko.dev/blog/internal/client"
+	"nurlashko.dev/blog/internal/view/user"
+)
+
+func LoginGET() http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		err := user.LoginModal().Render(r.Context(), w)
+		if err != nil {
+			slog.Error("error rendering: %v", err)
+		}
+	}
+}
+
+func LoginPOST(auth *client.AuthClient) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		ghToken := r.FormValue("gh_token")
+		token, err := auth.GetClientToken(ghToken)
+		if err != nil {
+			http.Error(w, "failed to get token", http.StatusUnauthorized)
+			slog.Error("failed to get token: " + err.Error())
+			return
+		}
+		http.SetCookie(w, &http.Cookie{
+			Name:     "x-auth-token",
+			Value:    token,
+			Secure:   true,
+			HttpOnly: true,
+			SameSite: http.SameSiteLaxMode,
+		})
+		w.WriteHeader(http.StatusOK)
+	}
+}

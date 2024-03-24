@@ -1,6 +1,6 @@
 package article
 
-import "nurlashko.dev/blog/internal/models"
+import "nurlashko.dev/blog/internal/model"
 import "time"
 
 script FormError() {
@@ -23,7 +23,7 @@ templ CreateArticle(toggle bool) {
             <div id="article_form">
                 @FormError()
                 <div id="error" style="color: red;"></div>
-                <form hx-target="#article_form" hx-post="/article" method="post">
+                <form hx-target="#article_form" hx-post="/article/create" method="post">
                   <input type="button" hx-target="#article_form" hx-get="/article/create?toggle=false" value="Close"/>
                   <input type="submit" value="Submit"/>
                   <br/>
@@ -45,7 +45,7 @@ templ CreateArticle(toggle bool) {
                 <p style="margin-top:0px; font-style: italic; margin-bottom:-12px;background-color:#f6f6f6">Preview</p>
                 <div style="background-color: azure">
                     <div id="preview">
-                        @ArticleRow(models.Article{
+                        @ArticleRow(model.Article{
                             ID: 42,
                             Title: "Title",
                             Content: "Content",

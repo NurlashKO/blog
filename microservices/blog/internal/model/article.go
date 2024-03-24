@@ -1,4 +1,4 @@
-package models
+package model
 
 import (
 	"database/sql"
@@ -17,7 +17,7 @@ type ArticleModel struct {
 }
 
 func (m *ArticleModel) All() ([]Article, error) {
-	rows, err := m.DB.Query("SELECT * FROM article ORDER BY created_at DESC")
+	rows, err := m.DB.Query("SELECT id, title, content, created_at FROM article ORDER BY created_at DESC")
 	if err != nil {
 		return nil, err
 	}
