@@ -42,7 +42,7 @@ func main() {
 	mux.HandleFunc("GET /article/create", handler.ArticleCreateGET())
 	mux.HandleFunc("POST /article/create", handler.ArticleCreatePOST(app.auth, app.db))
 
-	mux.HandleFunc("GET /article/preview", handler.ArticlePreview())
+	mux.HandleFunc("PUT /article/preview", handler.ArticlePreview(app.db))
 
 	mux.HandleFunc("GET /login", handler.LoginGET())
 	mux.HandleFunc("POST /login", handler.LoginPOST(app.auth))

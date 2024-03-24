@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"database/sql"
 	"log/slog"
 	"net/http"
 	"time"
@@ -9,13 +10,15 @@ import (
 	"nurlashko.dev/blog/internal/view/article"
 )
 
-func ArticlePreview() http.HandlerFunc {
+func ArticlePreview(db *sql.DB) http.HandlerFunc {
+	articleModel := model.ArticleModel{DB: db}
 	return func(w http.ResponseWriter, r *http.Request) {
 		preview := model.Article{
-			ID:        42,
-			Title:     r.FormValue("title"),
-			Content:   r.FormValue("content"),
-			CreatedAt: time.Now(),
+			ID:          42,
+			Title:       r.FormValue("title"),
+			Content:     r.FormValue("content"),
+			ContentHtml: articleModel.ContentToHTML(r.FormValue("content")),
+			CreatedAt:   time.Now(),
 		}
 		err := article.ArticleRow(preview, true).Render(r.Context(), w)
 		if err != nil {

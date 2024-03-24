@@ -4,6 +4,7 @@ go 1.22.1
 
 require (
 	github.com/a-h/templ v0.2.639
+	github.com/gomarkdown/markdown v0.0.0-20231222211730-1d6d20845b47
 	github.com/hashicorp/vault-client-go v0.4.3
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/lib/pq v1.10.9
