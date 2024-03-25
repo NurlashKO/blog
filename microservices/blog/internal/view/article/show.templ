@@ -4,6 +4,60 @@ import "nurlashko.dev/blog/internal/model"
 import "nurlashko.dev/blog/internal/view/layout"
 
 templ ShowIndex(articles []model.Article) {
+    <style>
+        #article-content * {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            line-height: 1.6;
+        }
+        #article-content li {
+            line-height: 1.6;
+        }
+        pre {
+            overflow-x: auto;
+            width: 100%;
+            background-color: #f6f8fa;
+            overflow-y: hidden;
+            padding: 8px;
+            margin-top: -16px;
+            margin-bottom: -16px;
+            border-radius: 8px;
+        }
+        code {
+            background-color: #f6f8fa;
+            font-size: 11px;
+        }
+
+        #article-content li:first-child {
+            margin-top: -24px;
+        }
+
+        #article-content ol {
+            line-height: 0.2;
+        }
+        #article-content ul {
+            line-height: 0.2;
+        }
+
+        #article-content {
+            line-height: 0.8;
+            padding-bottom: -8px;
+        }
+
+        #article-content li > img {
+            max-width: 540px;
+        }
+
+        #article-content img {
+            width: 100%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            outline: 1px solid #CCC;
+            max-width: 620px;
+        }
+
+    </style>
 	@layout.Base("NurlashKO's Blog🐈‍") {
         <div>
             @CreateArticle(false)
