@@ -6,6 +6,10 @@ import "github.com/xeonx/timeago"
 import "strconv"
 import "fmt"
 
+script copyToClipboard(articleID int) {
+    navigator.clipboard.writeText('https://nurlashko.dev/?articleID=' + articleID)
+}
+
 templ ArticleRow(article model.Article, isFirst bool) {
     <div>
         if isFirst {
@@ -16,7 +20,13 @@ templ ArticleRow(article model.Article, isFirst bool) {
         <div style="padding-left:8px; padding-right:8px;">
             <h3 style="margin-top:8px; margin-bottom: 0px; padding-bottom: 8px">
                 <p style="opacity: 0.7; font-size: small; margin: 0px;">
-                <i>#{strconv.Itoa(article.ID)}</i> [<i>{ timeago.English.Format(article.CreatedAt) }</i>] </p>
+                    <i
+                        style="cursor: pointer;border-bottom: 1px dotted black;"
+                        onclick={ copyToClipboard(article.ID) }>
+                            #{strconv.Itoa(article.ID)}
+                    </i>
+                    [<i>{ timeago.English.Format(article.CreatedAt) }</i>]
+                </p>
                 { article.Title }
             </h3>
             <div id="article-content" style="font-size: 14px; padding-left:7px; margin-top: 0px; white-space: pre-wrap; word-break: break-word; border-left: 1px dashed darkgray;">

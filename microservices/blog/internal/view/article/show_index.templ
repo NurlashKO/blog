@@ -6,6 +6,7 @@ import "nurlashko.dev/blog/internal/model"
 import "nurlashko.dev/blog/internal/view/layout"
 
 templ ShowIndex(articles []model.Article) {
+	@layout.Base("NurlashKO's Blog🐈‍") {
     <style>
         #article-content * {
             margin-top: 0px;
@@ -59,9 +60,7 @@ templ ShowIndex(articles []model.Article) {
             outline: 1px solid #CCC;
             max-width: 620px;
         }
-
     </style>
-	@layout.Base("NurlashKO's Blog🐈‍") {
         <div>
             @CreateArticle(false)
             <p style="font-style: italic;margin-bottom:-12px;background-color:#f6f6f6"> Posts </p>
