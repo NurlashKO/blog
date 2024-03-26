@@ -50,7 +50,7 @@ templ Base(title string) {
 		</head>
 		<body hx-boost="true">
 		    @user.Login()
-            <h1 style="margin:0px;">{ title } </h1>
+            <a style="all:unset; cursor: pointer;width:fit-content;" href="/"><h1 style="margin:0px;width:fit-content;" >{ title } </h1></a>
 			<main class="pt-40">
 				{ children... }
 			</main>
