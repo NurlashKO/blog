@@ -22,7 +22,28 @@ type ArticleModel struct {
 }
 
 func (m *ArticleModel) All() ([]Article, error) {
-	rows, err := m.DB.Query("SELECT id, title, content, content_html, created_at FROM article ORDER BY created_at DESC")
+	rows, err := m.DB.Query("SELECT id, title, content, content_html, created_at FROM article ORDER BY id DESC")
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var articles []Article
+	for rows.Next() {
+		article := Article{}
+		err := rows.Scan(&article.ID, &article.Title, &article.Content, &article.ContentHtml, &article.CreatedAt)
+		if err != nil {
+			return nil, err
+		}
+		articles = append(articles, article)
+	}
+	return articles, nil
+}
+
+func (m *ArticleModel) GetRange(fromID, count int) ([]Article, error) {
+	rows, err := m.DB.Query(
+		"SELECT id, title, content, content_html, created_at FROM article where id < $1 ORDER BY id DESC LIMIT $2",
+		fromID, count,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -48,12 +69,12 @@ func (m *ArticleModel) Insert(title, content string) error {
 
 func (m *ArticleModel) ContentToHTML(content string) string {
 	// create markdown parser with extensions
-	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock
+	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.NoEmptyLineBeforeBlock | parser.Attributes
 	p := parser.NewWithExtensions(extensions)
 	doc := p.Parse([]byte(content))
 
 	// create HTML renderer with extensions
-	htmlFlags := html.CommonFlags | html.HrefTargetBlank
+	htmlFlags := html.CommonFlags | html.HrefTargetBlank | html.LazyLoadImages
 	opts := html.RendererOptions{Flags: htmlFlags}
 	renderer := html.NewRenderer(opts)
 

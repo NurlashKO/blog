@@ -25,9 +25,8 @@ func NewBlogApp() *BlogApp {
 	}
 
 	return &BlogApp{
-		auth:   client.NewAuthClient(),
-		config: config,
-		db:     client.GetDB(config),
+		auth: client.NewAuthClient(config),
+		db:   client.GetDB(config),
 	}
 }
 
@@ -39,6 +38,7 @@ func main() {
 
 	mux.HandleFunc("GET /", handler.RootHandler(app.db))
 
+	mux.HandleFunc("GET /article", handler.ArticleRangeGET(app.db))
 	mux.HandleFunc("GET /article/create", handler.ArticleCreateGET())
 	mux.HandleFunc("POST /article/create", handler.ArticleCreatePOST(app.auth, app.db))
 

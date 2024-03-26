@@ -3,6 +3,7 @@ package handler
 import (
 	"database/sql"
 	"log/slog"
+	"math"
 	"net/http"
 
 	"nurlashko.dev/blog/internal/model"
@@ -12,7 +13,7 @@ import (
 func RootHandler(db *sql.DB) http.HandlerFunc {
 	articleModel := model.ArticleModel{DB: db}
 	return func(w http.ResponseWriter, r *http.Request) {
-		articles, err := articleModel.All()
+		articles, err := articleModel.GetRange(math.MaxInt32, 5)
 		if err != nil {
 			slog.Info("error fetching articles: %v", err)
 		}

@@ -6,15 +6,23 @@ import (
 
 	"github.com/hashicorp/vault-client-go"
 	"github.com/hashicorp/vault-client-go/schema"
+	"nurlashko.dev/blog/internal"
 )
 
 type AuthClient struct {
 	vault *vault.Client
 }
 
-func NewAuthClient() *AuthClient {
+const prodAddress = "http://vault:8200"
+const debugAddress = "https://vault.nurlashko.dev"
+
+func NewAuthClient(config internal.Config) *AuthClient {
+	vaultAddress := prodAddress
+	if config.Debug {
+		vaultAddress = debugAddress
+	}
 	client, err := vault.New(
-		vault.WithAddress("https://vault.nurlashko.dev"),
+		vault.WithAddress(vaultAddress),
 		vault.WithRequestTimeout(1*time.Second),
 	)
 	if err != nil {

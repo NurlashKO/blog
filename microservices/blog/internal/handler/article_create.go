@@ -4,13 +4,41 @@ import (
 	"database/sql"
 	"fmt"
 	"log/slog"
+	"math"
 	"net/http"
+	"strconv"
 
 	"nurlashko.dev/blog/internal/client"
 	"nurlashko.dev/blog/internal/middleware"
 	"nurlashko.dev/blog/internal/model"
 	"nurlashko.dev/blog/internal/view/article"
 )
+
+func ArticleRangeGET(db *sql.DB) http.HandlerFunc {
+	articleModel := model.ArticleModel{DB: db}
+	return func(w http.ResponseWriter, r *http.Request) {
+		var fromID int
+		var err error
+		if r.URL.Query().Has("fromID") {
+			fromID, err = strconv.Atoi(r.URL.Query().Get("fromID"))
+			if err != nil {
+				slog.Error("error parsing fromID: %v", err)
+				http.Error(w, "error parsing fromID", http.StatusBadRequest)
+				return
+			}
+		} else {
+			fromID = math.MaxInt
+		}
+		articles, err := articleModel.GetRange(fromID, 5)
+		if err != nil {
+			slog.Error("error fetching articles: %v", err)
+		}
+		err = article.ArticleList(articles).Render(r.Context(), w)
+		if err != nil {
+			slog.Error("error rendering: %v", err)
+		}
+	}
+}
 
 func ArticleCreateGET() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {

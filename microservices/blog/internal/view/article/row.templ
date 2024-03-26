@@ -1,11 +1,12 @@
 package article
 
 import "nurlashko.dev/blog/internal/model"
+import "nurlashko.dev/blog/internal/view/layout"
 import "github.com/xeonx/timeago"
 import "strconv"
+import "fmt"
 
 templ ArticleRow(article model.Article, isFirst bool) {
-
     <div>
         if isFirst {
             <hr style="border-width: 4px; opacity: 0.4"></hr>
@@ -23,4 +24,30 @@ templ ArticleRow(article model.Article, isFirst bool) {
             </div>
         </div>
     </div>
+}
+
+templ ArticleList(articles []model.Article) {
+    <div>
+        if len(articles) != 0 {
+            <div
+                hx-get={ string(templ.URL(fmt.Sprintf("/article?fromID=%d", articles[len(articles)-1].ID)))}
+                hx-trigger="revealed"
+                hx-target=".article-list-end"
+                hx-swap="outerHTML"
+            > </div>
+        }
+        for _, article := range articles {
+            @ArticleRow(article, false)
+        }
+    </div>
+
+    if len(articles) == 0 {
+        <div style="padding-left:8px; padding-right:8px;">
+            <img width="620" height="360" style="margin-left: auto; margin-right: auto; width: 100%; "src="https://www.giantfreakinrobot.com/wp-content/uploads/2022/06/hellotherethumb.jpg"/>
+        </div>
+    } else {
+        <div class="article-list-end">
+            @layout.Loader()
+        </div>
+    }
 }
