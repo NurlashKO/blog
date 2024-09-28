@@ -1,4 +1,4 @@
-name: Scratch CI
+name: _scratch CI
 
 on:
   push:
