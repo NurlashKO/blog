@@ -14,6 +14,7 @@ Review locally, then push to github for CI pipelines to apply your changes.
 create_microservice() {
   local mcs=$1
   local mcs_dir="$SCRIPT_DIR/$mcs"
+  local SCRATCH_MCS=_scratch
   # If git tree is clean then it is okay to commit.
   local SHOULD_GIT_COMMIT="true"
   git diff --quiet || SHOULD_GIT_COMMIT="false"
