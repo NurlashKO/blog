@@ -10,6 +10,7 @@ import (
 	"nurlashko.dev/auth/internal/auth"
 	"nurlashko.dev/auth/internal/handler"
 	"nurlashko.dev/auth/internal/jwt"
+	"nurlashko.dev/auth/internal/proxy"
 )
 
 type AuthApp struct {
@@ -34,9 +35,11 @@ func main() {
 	app := NewAuthApp()
 	jwtClient := jwt.NewJWTClient()
 	vaultClient := auth.NewVaultClient(app.config)
+	statikaProxy := proxy.NewStatikaReverseProxy()
 
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))
 	mux.HandleFunc("POST /token", handler.SetCookieJWTToken(jwtClient, vaultClient))
+	go statikaProxy.StartProxy()
 
 	slog.Info("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {
