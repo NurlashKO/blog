@@ -48,3 +48,13 @@ func (s *Client) GetPublicKey() []byte {
 		Bytes: x509.MarshalPKCS1PublicKey(s.publicKey),
 	})
 }
+
+func (s *Client) VerifyToken(token string) bool {
+	t, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
+		return s.publicKey, nil
+	})
+	if err != nil {
+		return false
+	}
+	return t.Valid
+}

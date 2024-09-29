@@ -35,11 +35,15 @@ func main() {
 	app := NewAuthApp()
 	jwtClient := jwt.NewJWTClient()
 	vaultClient := auth.NewVaultClient(app.config)
-	statikaProxy := proxy.NewStatikaReverseProxy()
+
+	statikaProxy := proxy.NewStatikaProxyTarget("https://static.nurlashko.dev", jwtClient)
 
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))
 	mux.HandleFunc("POST /token", handler.SetCookieJWTToken(jwtClient, vaultClient))
-	go statikaProxy.StartProxy()
+
+	go proxy.StartProxy(map[string]proxy.ProxyTarget{
+		statikaProxy.Host: statikaProxy,
+	})
 
 	slog.Info("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {

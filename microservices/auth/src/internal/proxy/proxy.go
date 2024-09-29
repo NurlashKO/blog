@@ -10,17 +10,24 @@ type ProxyServer interface {
 	StartProxy()
 }
 
-type ReverseProxy struct {
-	mux   *http.ServeMux
+type ProxyTarget struct {
+	Host  string
 	proxy *httputil.ReverseProxy
-	addr  string
 }
 
-func (r *ReverseProxy) StartProxy() {
-	r.mux.HandleFunc("/", r.proxy.ServeHTTP)
+func StartProxy(proxyMap map[string]ProxyTarget) {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if proxy, ok := proxyMap[r.Host]; ok {
+			proxy.proxy.ServeHTTP(w, r)
+		} else {
+			slog.Error("unknown forward target %s", r.Host)
+			w.WriteHeader(http.StatusNotFound)
+		}
+	})
 
-	slog.Info("Listening on " + r.addr)
-	if err := http.ListenAndServe(r.addr, r.mux); err != nil {
+	slog.Info("Listening on 0.0.0.0:9000")
+	if err := http.ListenAndServe("0.0.0.0:9000", mux); err != nil {
 		slog.Error("error listening: %v", err)
 	}
 }
