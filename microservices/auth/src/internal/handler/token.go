@@ -34,6 +34,7 @@ func SetCookieJWTToken(jwt *jwt.Client, auth *auth.VaultClient) http.HandlerFunc
 			Secure:   true,
 			HttpOnly: true,
 			SameSite: http.SameSiteLaxMode,
+			Domain:   "nurlashko.dev",
 		})
 		w.WriteHeader(http.StatusOK)
 	}
