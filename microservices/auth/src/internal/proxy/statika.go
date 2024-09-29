@@ -1,6 +1,5 @@
 package proxy
 
-import "C"
 import (
 	"log"
 	"log/slog"
