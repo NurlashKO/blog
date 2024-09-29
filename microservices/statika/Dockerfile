@@ -1,5 +1,6 @@
 FROM filebrowser/filebrowser:v2.27.0
 
 COPY src/config.json /.filebrowser.json
+ADD src/run.sh run.sh
 
-ENTRYPOINT /filebrowser config set --auth.method=proxy --auth.header=X-AUTH-STATIKA
+ENTRYPOINT run.sh
