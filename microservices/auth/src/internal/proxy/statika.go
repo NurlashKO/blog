@@ -3,6 +3,7 @@ package proxy
 import "C"
 import (
 	"log"
+	"log/slog"
 	"net/http/httputil"
 	"net/url"
 
@@ -15,17 +16,22 @@ func NewStatikaProxyTarget(u string, jwt *jwt.Client) ProxyTarget {
 		log.Fatalf("failed to parse url for statika: %v", err)
 	}
 
-	proxy := httputil.NewSingleHostReverseProxy(target)
-	proxy.Rewrite = func(r *httputil.ProxyRequest) {
-		r.SetURL(target)
-		r.Out.Header.Set("X-AUTH-STATIKA", "anonymous")
-
-		if c, err := r.Out.Cookie("X-AUTH-TOKEN"); err == nil {
-			if jwt.VerifyToken(c.Value) {
-				r.Out.Header.Set("X-AUTH-STATIKA", "admin")
+	proxy := &httputil.ReverseProxy{
+		Rewrite: func(r *httputil.ProxyRequest) {
+			forward, err := url.Parse(r.In.Header.Get("X-AUTH-PROXY-FORWARD"))
+			if err != nil {
+				slog.Error("[statika proxy] failed to parse next proxy jump url: %v", err)
+				return
 			}
-		}
-		r.SetXForwarded()
+			r.SetURL(forward)
+			r.Out.Header.Set("X-AUTH-STATIKA", "anonymous")
+
+			if c, err := r.Out.Cookie("X-AUTH-TOKEN"); err == nil {
+				if jwt.VerifyToken(c.Value) {
+					r.Out.Header.Set("X-AUTH-STATIKA", "admin")
+				}
+			}
+		},
 	}
 	proxy.Director = nil
 
