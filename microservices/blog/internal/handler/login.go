@@ -32,6 +32,7 @@ func LoginPOST(auth *client.AuthClient) http.HandlerFunc {
 			Secure:   true,
 			HttpOnly: true,
 			SameSite: http.SameSiteLaxMode,
+			Domain:   "nurlashko.dev",
 		})
 		w.WriteHeader(http.StatusOK)
 	}
