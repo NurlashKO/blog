@@ -27,7 +27,7 @@ func LoginPOST(auth *client.AuthClient) http.HandlerFunc {
 			return
 		}
 		http.SetCookie(w, &http.Cookie{
-			Name:     "x-auth-token",
+			Name:     "X-AUTH-TOKEN",
 			Value:    token,
 			Secure:   true,
 			HttpOnly: true,

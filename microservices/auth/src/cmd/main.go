@@ -11,6 +11,7 @@ import (
 	"nurlashko.dev/auth/internal/handler"
 	"nurlashko.dev/auth/internal/jwt"
 	"nurlashko.dev/auth/internal/proxy"
+	"nurlashko.dev/auth/internal/static"
 )
 
 type AuthApp struct {
@@ -33,13 +34,14 @@ func main() {
 
 	mux := http.NewServeMux()
 	app := NewAuthApp()
-	jwtClient := jwt.NewJWTClient()
+	jwtClient := jwt.NewJWTClient(app.config.Domain)
 	vaultClient := auth.NewVaultClient(app.config)
 
 	statikaProxy := proxy.NewStatikaProxyTarget("https://static.nurlashko.dev", jwtClient)
 
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))
 	mux.HandleFunc("POST /token", handler.SetCookieJWTToken(jwtClient, vaultClient))
+	mux.Handle("GET /", http.FileServerFS(static.GetPages()))
 
 	go proxy.StartProxy(map[string]proxy.ProxyTarget{
 		statikaProxy.Host: statikaProxy,

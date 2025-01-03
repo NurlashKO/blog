@@ -29,12 +29,12 @@ func SetCookieJWTToken(jwt *jwt.Client, auth *auth.VaultClient) http.HandlerFunc
 			return
 		}
 		http.SetCookie(w, &http.Cookie{
-			Name:     "x-auth-token",
+			Name:     "X-AUTH-TOKEN",
 			Value:    token,
 			Secure:   true,
 			HttpOnly: true,
 			SameSite: http.SameSiteLaxMode,
-			Domain:   "nurlashko.dev",
+			Domain:   jwt.Domain,
 		})
 		w.WriteHeader(http.StatusOK)
 	}

@@ -11,11 +11,12 @@ import (
 )
 
 type Client struct {
+	Domain     string
 	privateKey *rsa.PrivateKey
 	publicKey  *rsa.PublicKey
 }
 
-func NewJWTClient() *Client {
+func NewJWTClient(domain string) *Client {
 	key, err := rsa.GenerateKey(rand.Reader, 4096)
 	if err != nil {
 		log.Fatalf("error generating random private token: %v", err)
@@ -26,6 +27,7 @@ func NewJWTClient() *Client {
 	}
 
 	return &Client{
+		Domain:     domain,
 		privateKey: key,
 		publicKey:  &key.PublicKey,
 	}

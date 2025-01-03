@@ -8,6 +8,8 @@ type (
 	// Config of the app.
 	Config struct {
 		Debug bool `envconfig:"debug"`
+
+		Domain string `envconfig:"domain" default:"nurlashko.dev"`
 	}
 )
 
