@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"nurlashko.dev/blog/internal/client"
+	auth "nurlashko.dev/auth/client"
 	"nurlashko.dev/blog/internal/middleware"
 	"nurlashko.dev/blog/internal/model"
 	"nurlashko.dev/blog/internal/view/article"
@@ -53,7 +53,7 @@ func ArticleCreateGET() http.HandlerFunc {
 	}
 }
 
-func ArticleCreatePOST(auth *client.AuthClient, db *sql.DB) http.HandlerFunc {
+func ArticleCreatePOST(auth *auth.AuthClient, db *sql.DB) http.HandlerFunc {
 	articleModel := model.ArticleModel{DB: db}
 	return middleware.AuthenticationMiddleware(auth, func(w http.ResponseWriter, r *http.Request) {
 		title := r.FormValue("title")
