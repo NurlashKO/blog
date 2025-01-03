@@ -3,7 +3,7 @@ package middleware
 import (
 	"net/http"
 
-	"nurlashko.dev/blog/internal/client"
+	"nurlashko.dev/auth/client"
 )
 
 func AuthenticationMiddleware(auth *client.AuthClient, next http.HandlerFunc) http.HandlerFunc {
