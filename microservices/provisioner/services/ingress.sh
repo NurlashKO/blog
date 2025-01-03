@@ -4,4 +4,5 @@ docker run $(DOCKER_DEFAULT_ARGS ingress) \
     -p 80:80 \
     -p 443:443 \
     -v $(pwd)/data/certificates:/etc/letsencrypt \
+    -v $(pwd)/data/statika/srv/images:/www/data/images \
     gcr.io/kouzoh-p-nurlashko/nurlashko/ingress
