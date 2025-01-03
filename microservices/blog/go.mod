@@ -25,4 +25,4 @@ require (
 	golang.org/x/time v0.0.0-20220922220347-f3bd1da661af // indirect
 )
 
-replace nurlashko.dev/auth => ../auth/src
+replace nurlashko.dev/auth => github.com/nurlashko/blog/microservices/auth/src v0.0.0-20250103094058-60cd8fe15dbe
