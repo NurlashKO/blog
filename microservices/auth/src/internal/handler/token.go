@@ -36,7 +36,8 @@ func SetCookieJWTToken(jwt *jwt.Client, auth *auth.VaultClient) http.HandlerFunc
 			SameSite: http.SameSiteLaxMode,
 			Domain:   jwt.Domain,
 		})
-		w.WriteHeader(http.StatusOK)
+		w.Header().Set("X-AUTH-TOKEN", token)
+		http.Redirect(w, r, "https://blog.nurlashko.dev", 301)
 	}
 }
 
