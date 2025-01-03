@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"net/http"
 
-	"nurlashko.dev/blog/internal/client"
+	auth "nurlashko.dev/auth/client"
 	"nurlashko.dev/blog/internal/view/user"
 )
 
@@ -17,7 +17,7 @@ func LoginGET() http.HandlerFunc {
 	}
 }
 
-func LoginPOST(auth *client.AuthClient) http.HandlerFunc {
+func LoginPOST(auth *auth.AuthClient) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ghToken := r.FormValue("gh_token")
 		token, err := auth.GetClientToken(ghToken)
