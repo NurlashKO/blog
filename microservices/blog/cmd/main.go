@@ -7,13 +7,14 @@ import (
 	"net/http"
 	"os"
 
+	auth "nurlashko.dev/auth/client"
 	"nurlashko.dev/blog/internal"
 	"nurlashko.dev/blog/internal/client"
 	"nurlashko.dev/blog/internal/handler"
 )
 
 type BlogApp struct {
-	auth   *client.AuthClient
+	auth   *auth.AuthClient
 	config internal.Config
 	db     *sql.DB
 }
@@ -25,7 +26,7 @@ func NewBlogApp() *BlogApp {
 	}
 
 	return &BlogApp{
-		auth: client.NewAuthClient(config),
+		auth: auth.NewAuthClient(config.Debug),
 		db:   client.GetDB(config),
 	}
 }

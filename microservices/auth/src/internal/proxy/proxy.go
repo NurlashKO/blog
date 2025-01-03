@@ -19,6 +19,7 @@ func StartProxy(proxyMap map[string]ProxyTarget) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if proxy, ok := proxyMap[r.Host]; ok {
+			slog.Info("proxying to %s", r.Host)
 			proxy.proxy.ServeHTTP(w, r)
 		} else {
 			slog.Error("unknown forward target %s", r.Host)
