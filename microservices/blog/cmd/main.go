@@ -48,7 +48,6 @@ func main() {
 	mux.HandleFunc("PUT /article/preview", handler.ArticlePreview(app.db))
 
 	mux.HandleFunc("GET /login", handler.LoginGET())
-
 	mux.HandleFunc("POST /login", handler.LoginPOST(app.auth, app.config.Debug))
 
 	slog.Info("Listening on :8000")
