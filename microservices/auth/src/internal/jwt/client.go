@@ -5,7 +5,9 @@ import (
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
+	"fmt"
 	"log"
+	"log/slog"
 
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -53,9 +55,13 @@ func (s *Client) GetPublicKey() []byte {
 
 func (s *Client) VerifyToken(token string) bool {
 	t, err := jwt.Parse(token, func(t *jwt.Token) (interface{}, error) {
+		if t.Method.Alg() != jwt.SigningMethodRS256.Alg() {
+			return nil, fmt.Errorf("unexpected signing method: %v", t.Method.Alg())
+		}
 		return s.publicKey, nil
 	})
 	if err != nil {
+		slog.Error("failed to parse token: %v", err)
 		return false
 	}
 	return t.Valid
