@@ -40,6 +40,7 @@ func main() {
 	statikaProxy := proxy.NewStatikaProxyTarget("https://static.nurlashko.dev", jwtClient)
 
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))
+	mux.HandleFunc("GET /validate", handler.GetJWTPublicKey(jwtClient))
 	mux.HandleFunc("POST /token", handler.SetCookieJWTToken(jwtClient, vaultClient))
 	mux.Handle("GET /", http.FileServerFS(static.GetPages()))
 

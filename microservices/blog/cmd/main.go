@@ -26,8 +26,9 @@ func NewBlogApp() *BlogApp {
 	}
 
 	return &BlogApp{
-		auth: auth.NewAuthClient(config.Debug),
-		db:   client.GetDB(config),
+		auth:   auth.NewAuthClient(config.Debug),
+		db:     client.GetDB(config),
+		config: config,
 	}
 }
 
@@ -42,11 +43,13 @@ func main() {
 	mux.HandleFunc("GET /article", handler.ArticleRangeGET(app.db))
 	mux.HandleFunc("GET /article/create", handler.ArticleCreateGET())
 	mux.HandleFunc("POST /article/create", handler.ArticleCreatePOST(app.auth, app.db))
+	mux.HandleFunc("DELETE /article/delete", handler.ArticleDelete(app.auth, app.db))
 
 	mux.HandleFunc("PUT /article/preview", handler.ArticlePreview(app.db))
 
 	mux.HandleFunc("GET /login", handler.LoginGET())
-	mux.HandleFunc("POST /login", handler.LoginPOST(app.auth))
+
+	mux.HandleFunc("POST /login", handler.LoginPOST(app.auth, app.config.Debug))
 
 	slog.Info("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {

@@ -3,17 +3,6 @@ package article
 import "nurlashko.dev/blog/internal/model"
 import "time"
 
-script FormError() {
-    document.getElementById('article_form').addEventListener('htmx:responseError', function(evt) {
-        if (evt.detail.xhr.status == 401) {
-            document.querySelector('body').dispatchEvent(new Event('trigger-login'))
-            document.getElementById('error').innerHTML = "";
-            return;
-        }
-        document.getElementById('error').innerHTML = evt.detail.xhr.responseText;
-    });
-}
-
 templ CreateArticle(toggle bool) {
         if !toggle {
             <div id="submenu">
@@ -21,8 +10,6 @@ templ CreateArticle(toggle bool) {
             </div>
         } else {
             <div id="article_form">
-                @FormError()
-                <div id="error" style="color: red;"></div>
                 <form hx-target="#article_form" hx-post="/article/create" method="post">
                   <input type="button" hx-target="#article_form" hx-get="/article/create?toggle=false" value="Close"/>
                   <input type="submit" value="Submit"/>
@@ -38,8 +25,7 @@ templ CreateArticle(toggle bool) {
                          hx-target="#preview"
                          hx-put="/article/preview"
                          style="width: calc(100% - 4px);"
-                         rows="4"
-                  />
+                         rows="4"></textarea>
                 </form>
 
                 <p style="margin-top:0px; font-style: italic; margin-bottom:-12px;background-color:#f6f6f6">Preview</p>
