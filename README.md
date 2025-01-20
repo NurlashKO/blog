@@ -1,5 +1,6 @@
 | Microservice | Description |
 |--------------|-------------|
+[![vpn CI](https://github.com/NurlashKO/blog/actions/workflows/vpn-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/vpn-ci.yml)|wireguard server to allow clients change their "network geolocation"
 [![auth CI](https://github.com/NurlashKO/blog/actions/workflows/auth-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/auth-ci.yml)|authentication service
 [![statika CI](https://github.com/NurlashKO/blog/actions/workflows/statika-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/statika-ci.yml)|Web interface to manage server static files
 [![database CI](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml/badge.svg)](https://github.com/NurlashKO/blog/actions/workflows/database-ci.yml)|Persistant storage for data like blog posts
