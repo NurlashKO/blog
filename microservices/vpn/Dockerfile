@@ -1,4 +1,5 @@
-FROM scratch
+FROM kylemanna/openvpn:2.4
 
-WORKDIR /opt/vpn
-COPY src .
+COPY src/ src/
+
+ENTRYPOINT run.sh
