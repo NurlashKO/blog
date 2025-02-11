@@ -4,4 +4,4 @@ FROM openvpn/openvpn-as@sha256:59da5dff6dd66a9451f99553c8252ae16680d0d0a06ee4a6b
 COPY run.sh ./
 
 RUN chmod +x ./run.sh
-CMD ["run.sh"]
+CMD ["./run.sh"]
