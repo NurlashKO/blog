@@ -5,5 +5,3 @@ ENV CERTBOT_EMAIL=zh.nurlan96@gmail.com
 COPY configs/ /etc/nginx/conf.d/
 COPY include/ /etc/nginx/include/
 COPY nginx.conf /etc/nginx/nginx.conf
-
-ENTRYPOINT ["sleep", "3000"]
