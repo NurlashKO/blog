@@ -80,7 +80,9 @@ templ CreateArticle(toggle bool) {
         						const imagePath = response.path;
         						// Append the image path to the content textarea.
         						const contentTextArea = document.getElementById('content');
-        						contentTextArea.value += `![image](${imagePath})\n`;
+        						contentTextArea.value +=
+        						    `{style="max-width:620px; margin-right: auto; margin-left:auto"}\n` +
+        						    `![image](${imagePath})\n`;
         					} else {
         						console.error('Image upload response missing path:', response);
         					}
