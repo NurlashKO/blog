@@ -1,44 +1,91 @@
 package article
 
-import "nurlashko.dev/blog/internal/model"
-import "time"
+import (
+	"nurlashko.dev/blog/internal/model"
+	"time"
+)
 
 templ CreateArticle(toggle bool) {
-        if !toggle {
-            <div id="submenu">
-                <a href="#" hx-target="#submenu" hx-get="/article/create?toggle=true" style="font-size: smaller;"> ✍️ Add Post </a>
-            </div>
-        } else {
-            <div id="article_form">
-                <form hx-target="#article_form" hx-post="/article/create" method="post">
-                  <input type="button" hx-target="#article_form" hx-get="/article/create?toggle=false" value="Close"/>
-                  <input type="submit" value="Submit"/>
-                  <br/>
-                  <input placeholder="Title" type="text" id="title" name="title"
-                         hx-trigger="input changed delay:500ms, title"
-                         hx-target="#preview"
-                         hx-put="/article/preview"
-                         style="width: calc(100% - 4px);margin-bottom:4px; margin-top:8px"
-                  /><br/>
-                  <textarea placeholder="Content" type="text" id="content" name="content"
-                         hx-trigger="input changed delay:500ms, content"
-                         hx-target="#preview"
-                         hx-put="/article/preview"
-                         style="width: calc(100% - 4px);"
-                         rows="4"></textarea>
-                </form>
+	if !toggle {
+		<div id="submenu">
+			<a href="#" hx-target="#submenu" hx-get="/article/create?toggle=true" style="font-size: smaller;">✍️ Add Post </a>
+		</div>
+	} else {
+		<div id="article_form">
+			<form hx-target="#article_form" hx-post="/article/create" method="post">
+				<input type="button" hx-target="#article_form" hx-get="/article/create?toggle=false" value="Close"/>
+				<input type="submit" value="Submit"/>
+				<br/>
+				<input
+					placeholder="Title"
+					type="text"
+					id="title"
+					name="title"
+					hx-trigger="input changed delay:500ms, title"
+					hx-target="#preview"
+					hx-put="/article/preview"
+					style="width: calc(100% - 4px);margin-bottom:4px; margin-top:8px"
+				/>
+				<br/>
+				<textarea
+					placeholder="Content"
+					type="text"
+					id="content"
+					name="content"
+					hx-trigger="input changed delay:500ms, content"
+					hx-target="#preview"
+					hx-put="/article/preview"
+					style="width: calc(100% - 4px);"
+					rows="4"
+				></textarea>
+			</form>
 
-                <p style="margin-top:0px; font-style: italic; margin-bottom:-12px;background-color:#f6f6f6">Preview</p>
-                <div style="background-color: azure">
-                    <div id="preview">
-                        @ArticleRow(model.Article{
-                            ID: 42,
-                            Title: "Title",
-                            Content: "Content",
-                            CreatedAt: time.Now(),
-                        }, true)
-                    </div>
-                </div>
-            </div>
-        }
+            <form
+                id="image-upload-form"
+                hx-post="/image/upload"
+                method="post"
+                enctype="multipart/form-data"
+                hx-swap="none"
+                hx-on::after-request="imageUploadDone(event)">
+                <input type="file" name="image" accept="image/png, image/jpeg" id="image-upload-input" hx-trigger="change" />
+                <script>
+                  // Add an event listener to the image-upload-input element.
+                  document.getElementById('image-upload-input').addEventListener('change',
+                    function() {
+                      // Submit the image-upload-form when a file is selected.
+                      document.getElementById('image-upload-form').requestSubmit();
+                    });
+                </script>
+            </form>
+            <br/>
+			<p style="margin-top:0px; font-style: italic; margin-bottom:-12px;background-color:#f6f6f6">Preview</p>
+			<div style="background-color: azure">
+				<div id="preview">
+					@ArticleRow(model.Article{
+						ID:        42,
+						Title:     "Title",
+						Content:   "Content",
+						CreatedAt: time.Now(),
+					}, true)
+				</div>
+			</div>
+		</div>
+				<script>
+        			function imageUploadDone(evt) {
+        			    console.log(evt)
+        				if (evt.detail.successful) {
+        					// Extract the JSON response from the response.
+        					const response = JSON.parse(evt.detail.xhr.response);
+        					if (response && response.path) {
+        						const imagePath = response.path;
+        						// Append the image path to the content textarea.
+        						const contentTextArea = document.getElementById('content');
+        						contentTextArea.value += `![image](${imagePath})\n`;
+        					} else {
+        						console.error('Image upload response missing path:', response);
+        					}
+        				}
+        			};
+        		</script>
+	}
 }

@@ -50,6 +50,8 @@ func main() {
 	mux.HandleFunc("GET /login", handler.LoginGET())
 	mux.HandleFunc("POST /login", handler.LoginPOST(app.auth, app.config.Debug))
 
+	mux.HandleFunc("POST /image/upload", handler.ImageUpload(app.auth))
+
 	slog.Info("Listening on :8000")
 	if err := http.ListenAndServe("0.0.0.0:8000", mux); err != nil {
 		slog.Error("error listening: %v", err)
