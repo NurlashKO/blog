@@ -47,7 +47,7 @@ templ CreateArticle(toggle bool) {
                 enctype="multipart/form-data"
                 hx-swap="none"
                 hx-on::after-request="imageUploadDone(event)">
-                <input type="file" name="image" accept="image/png, image/jpeg" id="image-upload-input" hx-trigger="change" />
+                <input type="file" name="image" accept="image/*" id="image-upload-input" hx-trigger="change" />
                 <script>
                   // Add an event listener to the image-upload-input element.
                   document.getElementById('image-upload-input').addEventListener('change',

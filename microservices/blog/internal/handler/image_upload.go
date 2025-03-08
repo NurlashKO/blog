@@ -23,7 +23,6 @@ const (
 func ImageUpload(auth *auth.AuthClient) http.HandlerFunc {
 	return middleware.AuthenticationMiddleware(auth, func(w http.ResponseWriter, r *http.Request) {
 		// Get file from form
-		fmt.Println(r)
 		file, fileHeader, err := r.FormFile("image")
 		if err != nil {
 			http.Error(w, "Invalid file", http.StatusBadRequest)
@@ -75,6 +74,5 @@ func ImageUpload(auth *auth.AuthClient) http.HandlerFunc {
 			slog.Error("upload: cannot write JSON response", "err", err)
 			return
 		}
-		w.WriteHeader(http.StatusOK)
 	})
 }
