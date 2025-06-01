@@ -11,6 +11,7 @@ import (
 	"nurlashko.dev/auth/internal/handler"
 	"nurlashko.dev/auth/internal/jwt"
 	"nurlashko.dev/auth/internal/proxy"
+	samlidp "nurlashko.dev/auth/internal/saml"
 	"nurlashko.dev/auth/internal/static"
 )
 
@@ -39,9 +40,22 @@ func main() {
 
 	statikaProxy := proxy.NewStatikaProxyTarget("https://static.nurlashko.dev", jwtClient)
 
+	// Initialize SAML service
+	samlService, err := samlidp.NewService(&app.config)
+	if err != nil {
+		log.Fatalf("error initializing SAML service: %v", err)
+	}
+
+	// SAML endpoints
+	mux.Handle("/saml/metadata", samlService.MetadataHandler())
+	mux.Handle("/saml/sso", samlService.ACSHandler())
+
+	// General jwt auth endpoints
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))
 	mux.HandleFunc("POST /token", handler.SetCookieJWTToken(jwtClient, vaultClient))
-	mux.Handle("GET /", http.FileServerFS(static.GetPages()))
+
+	// Default handler for unmatched routes
+	mux.Handle("/", http.FileServerFS(static.GetPages()))
 
 	go proxy.StartProxy(map[string]proxy.ProxyTarget{
 		statikaProxy.Host: statikaProxy,
