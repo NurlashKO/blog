@@ -40,15 +40,15 @@ func main() {
 
 	statikaProxy := proxy.NewStatikaProxyTarget("https://static.nurlashko.dev", jwtClient)
 
-	// Initialize SAML service
-	samlService, err := samlidp.NewService(&app.config)
+	// Initialize SAML Identity Provider service
+	samlService, err := samlidp.NewService(&app.config, jwtClient)
 	if err != nil {
 		log.Fatalf("error initializing SAML service: %v", err)
 	}
 
 	// SAML endpoints
 	mux.Handle("/saml/metadata", samlService.MetadataHandler())
-	mux.Handle("/saml/sso", samlService.ACSHandler())
+	mux.Handle("/saml/sso", samlService.SSOHandler())
 
 	// General jwt auth endpoints
 	mux.HandleFunc("GET /public/jwt-key", handler.GetJWTPublicKey(jwtClient))

@@ -66,3 +66,13 @@ func (s *Client) VerifyToken(token string) bool {
 	}
 	return t.Valid
 }
+
+// ParseToken parses a JWT token and returns the token object
+func (s *Client) ParseToken(tokenString string) (*jwt.Token, error) {
+	return jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
+		if t.Method.Alg() != jwt.SigningMethodRS256.Alg() {
+			return nil, fmt.Errorf("unexpected signing method: %v", t.Method.Alg())
+		}
+		return s.publicKey, nil
+	})
+}
