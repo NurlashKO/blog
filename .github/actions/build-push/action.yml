@@ -2,6 +2,8 @@ name: "Build And Push Docker Image"
 inputs:
   microservice:
     required: true
+  repoflow_pwd:
+    required: true
 
 runs:
   using: "composite"
@@ -12,4 +14,9 @@ runs:
       with:
         registry: api.repoflow.io
         username: nurlashko
-        password: ${{ secrets.REPOFLOW_PWD }}
+        password: ${{ inputs.REPOFLOW_PWD }}
+    -
+      name: Build And Push Docker Image
+      run: |
+        docker build microservices/${{ inputs.microservice }} -t api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}:test
+        docker push api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}

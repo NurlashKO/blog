@@ -20,3 +20,4 @@ jobs:
         uses: 'NurlashKO/blog/.github/actions/build-push@main'
         with:
           microservice: ${{ env.MICROSERVICE }}
+          repoflow_pwd: ${{ secrets.REPOFLOW_PWD }}
