@@ -14,7 +14,7 @@ runs:
       with:
         registry: api.repoflow.io
         username: nurlashko
-        password: ${{ inputs.REPOFLOW_PWD }}
+        password: ${{ inputs.repoflow_pwd}}
     -
       name: Build And Push Docker Image
       run: |
