@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blog 
+  namespace: blog
+  labels:
+    app: blog
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blog
+  template:
+    metadata:
+      labels:
+        app: blog
+    spec:
+      containers:
+      - name: blog
+        image: api.repoflow.io/zhnurlan96-5303/blog/blog:test2
+        ports:
+        - containerPort: 8000

@@ -68,12 +68,14 @@ templ ShowIndex(articles []model.Article) {
                 @ArticleRow(article, i == 0)
             }
         </div>
-        <div
-            hx-get={ string(templ.URL(fmt.Sprintf("/article?fromID=%d", articles[len(articles)-1].ID)))}
-            hx-trigger="revealed"
-            hx-target=".article-list-end"
-            hx-swap="outerHTML"
-        > </div>
+        if len(articles) > 0 {
+            <div
+                hx-get={ string(templ.URL(fmt.Sprintf("/article?fromID=%d", articles[len(articles)-1].ID)))}
+                hx-trigger="revealed"
+                hx-target=".article-list-end"
+                hx-swap="outerHTML"
+            > </div>
+        }
         @layout.Footer()
         <div class="article-list-end">
             @layout.Loader()

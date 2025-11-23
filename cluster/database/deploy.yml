@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: database
+  labels:
+    app: postgres 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres 
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: database
+        image: api.repoflow.io/zhnurlan96-5303/blog/database:test
+        ports:
+        - containerPort: 5432 # Change to your DB port if different
+        env:
+        - name: POSTGRES_USER
+          value: "nurlashko"
+        - name: POSTGRES_PASSWORD
+          value: "tmp"
+        - name: POSTGRES_DB
+          value: "blog"

@@ -7,13 +7,10 @@ import (
 	"nurlashko.dev/blog/internal"
 )
 
-const (
-	connectionStringLocal = "postgres://nurlashko:tmp@localhost:5432/blog?sslmode=disable"
-	connectionStringProd  = "postgres://nurlashko:tmp@database:5432/blog?sslmode=disable"
-)
+const connectionStringLocal = "postgres://nurlashko:tmp@localhost:5432/blog?sslmode=disable"
 
 func GetDB(config internal.Config) *sql.DB {
-	connectionString := connectionStringProd
+	connectionString := config.DatabaseURI
 	if config.Debug {
 		connectionString = connectionStringLocal
 	}
