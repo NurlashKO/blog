@@ -17,6 +17,7 @@ runs:
         password: ${{ inputs.repoflow_pwd}}
     -
       name: Build And Push Docker Image
+      shell: bash
       run: |
         docker build microservices/${{ inputs.microservice }} -t api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}:test
         docker push api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}
