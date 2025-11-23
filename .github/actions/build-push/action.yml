@@ -19,5 +19,5 @@ runs:
       name: Build And Push Docker Image
       shell: bash
       run: |
-        docker build microservices/${{ inputs.microservice }} -t api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}:test
-        docker push api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}
+        docker build microservices/${{ inputs.microservice }} -t api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}:${{ github.run_number }}
+        docker push api.repoflow.io/zhnurlan96-5303/blog/${{ inputs.microservice }}:${{ github.run_number }}

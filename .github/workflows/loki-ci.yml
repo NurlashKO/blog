@@ -17,8 +17,7 @@ jobs:
     steps:
       - uses: 'actions/checkout@v4'
       - name: Setup Docker Credentials
-        uses: 'NurlashKO/blog/.github/actions/setup-docker-credentials@main'
-      - name: Build && Push Docker image
-        run: |
-          docker build microservices/$MICROSERVICE -t gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE
-          docker push gcr.io/kouzoh-p-nurlashko/nurlashko/$MICROSERVICE
+        uses: 'NurlashKO/blog/.github/actions/build-push@main'
+        with:
+          microservice: ${{ env.MICROSERVICE }}
+          repoflow_pwd: ${{ secrets.REPOFLOW_PWD }}
