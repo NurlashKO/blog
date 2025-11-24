@@ -22,7 +22,7 @@ func NewAuthClient(debug bool) *AuthClient {
 	}
 	client, err := vault.New(
 		vault.WithAddress(vaultAddress),
-		vault.WithRequestTimeout(1*time.Second),
+		vault.WithRequestTimeout(5*time.Second),
 	)
 	if err != nil {
 		panic(err)
