@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - uses: 'actions/checkout@v4'
-      - name: Setup Docker Credentials
+      - name: Build and Push Docker Image
         uses: 'NurlashKO/blog/.github/actions/build-push@main'
         with:
           microservice: ${{ env.MICROSERVICE }}

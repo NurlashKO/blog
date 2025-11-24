@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: blog
-        image: api.repoflow.io/zhnurlan96-5303/blog/blog:test2
+        image: api.repoflow.io/zhnurlan96-5303/blog/blog:90
         ports:
         - containerPort: 8000
