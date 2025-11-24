@@ -3,7 +3,7 @@ module github.com/NurlashKO/blog/microservices/blog
 go 1.24.0
 
 require (
-	github.com/NurlashKO/blog/microservices/auth/src v0.0.0-20251124083401-8c80ea442b34
+	github.com/NurlashKO/blog/microservices/auth/src v0.0.0-20251124084307-e761fb8e021e
 	github.com/a-h/templ v0.3.960
 	github.com/gomarkdown/markdown v0.0.0-20250810172220-2e2c11897d1a
 	github.com/kelseyhightower/envconfig v1.4.0
