@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog-tls-ingress
+  namespace: blog
+  annotations:
+    spec.ingressClassName: traefik
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+    - host: blog.nurlashko.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8000
+  tls:
+    - secretName: blog-tls
+      hosts:
+        - blog.nurlashko.dev
