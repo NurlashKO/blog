@@ -18,7 +18,18 @@ spec:
                 name: web
                 port:
                   number: 8000
+    - host: nurlashko.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 8000
   tls:
     - secretName: blog-tls
       hosts:
         - blog.nurlashko.dev
+        - nurlashko.dev
