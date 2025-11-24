@@ -4,7 +4,6 @@ metadata:
   name: web
   namespace: blog
 spec:
-  type: LoadBalancer 
   selector:
     app: blog
   ports:
