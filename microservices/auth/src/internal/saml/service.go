@@ -9,8 +9,8 @@ import (
 
 	"github.com/crewjam/saml"
 	"github.com/crewjam/saml/logger"
-	"nurlashko.dev/auth/internal"
-	"nurlashko.dev/auth/internal/jwt"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/jwt"
 )
 
 // Service represents the SAML Identity Provider service

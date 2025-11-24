@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"nurlashko.dev/blog/internal/model"
-	"nurlashko.dev/blog/internal/view/article"
+	"github.com/NurlashKO/blog/microservices/blog/internal/model"
+	"github.com/NurlashKO/blog/microservices/blog/internal/view/article"
 )
 
 func ArticlePreview(db *sql.DB) http.HandlerFunc {

@@ -27,3 +27,10 @@ spec:
           value: "tmp"
         - name: POSTGRES_DB
           value: "blog"
+        volumeMounts:
+        - name: pgdata
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: pgdata
+        persistentVolumeClaim:
+          claimName: pgdata

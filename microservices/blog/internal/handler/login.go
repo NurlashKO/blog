@@ -4,8 +4,8 @@ import (
 	"log/slog"
 	"net/http"
 
-	auth "nurlashko.dev/auth/client"
-	"nurlashko.dev/blog/internal/view/user"
+	auth "github.com/NurlashKO/blog/microservices/auth/src/client"
+	"github.com/NurlashKO/blog/microservices/blog/internal/view/user"
 )
 
 func LoginGET() http.HandlerFunc {

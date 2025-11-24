@@ -6,7 +6,7 @@ import (
 	"net/http/httputil"
 	"net/url"
 
-	"nurlashko.dev/auth/internal/jwt"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/jwt"
 )
 
 func NewStatikaProxyTarget(u string, jwt *jwt.Client) ProxyTarget {

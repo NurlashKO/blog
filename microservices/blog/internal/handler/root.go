@@ -8,8 +8,8 @@ import (
 	"slices"
 	"strconv"
 
-	"nurlashko.dev/blog/internal/model"
-	"nurlashko.dev/blog/internal/view/article"
+	"github.com/NurlashKO/blog/microservices/blog/internal/model"
+	"github.com/NurlashKO/blog/microservices/blog/internal/view/article"
 )
 
 func RootHandler(db *sql.DB) http.HandlerFunc {

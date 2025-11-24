@@ -6,13 +6,13 @@ import (
 	"net/http"
 	"os"
 
-	"nurlashko.dev/auth/internal"
-	"nurlashko.dev/auth/internal/auth"
-	"nurlashko.dev/auth/internal/handler"
-	"nurlashko.dev/auth/internal/jwt"
-	"nurlashko.dev/auth/internal/proxy"
-	samlidp "nurlashko.dev/auth/internal/saml"
-	"nurlashko.dev/auth/internal/static"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/auth"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/handler"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/jwt"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/proxy"
+	samlidp "github.com/NurlashKO/blog/microservices/auth/src/internal/saml"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/static"
 )
 
 type AuthApp struct {

@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"os"
 
-	auth "nurlashko.dev/auth/client"
-	"nurlashko.dev/blog/internal"
-	"nurlashko.dev/blog/internal/client"
-	"nurlashko.dev/blog/internal/handler"
+	auth "github.com/NurlashKO/blog/microservices/auth/src/client"
+	"github.com/NurlashKO/blog/microservices/blog/internal"
+	"github.com/NurlashKO/blog/microservices/blog/internal/client"
+	"github.com/NurlashKO/blog/microservices/blog/internal/handler"
 )
 
 type BlogApp struct {

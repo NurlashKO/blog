@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	_ "github.com/lib/pq"
-	"nurlashko.dev/blog/internal"
+	"github.com/NurlashKO/blog/microservices/blog/internal"
 )
 
 const connectionStringLocal = "postgres://nurlashko:tmp@localhost:5432/blog?sslmode=disable"

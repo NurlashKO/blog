@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"strconv"
 
-	auth "nurlashko.dev/auth/client"
-	"nurlashko.dev/blog/internal/middleware"
-	"nurlashko.dev/blog/internal/model"
-	"nurlashko.dev/blog/internal/view/article"
+	auth "github.com/NurlashKO/blog/microservices/auth/src/client"
+	"github.com/NurlashKO/blog/microservices/blog/internal/middleware"
+	"github.com/NurlashKO/blog/microservices/blog/internal/model"
+	"github.com/NurlashKO/blog/microservices/blog/internal/view/article"
 )
 
 func ArticleDelete(auth *auth.AuthClient, db *sql.DB) http.HandlerFunc {

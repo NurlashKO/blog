@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"net/http"
 
-	"nurlashko.dev/auth/internal/auth"
-	"nurlashko.dev/auth/internal/jwt"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/auth"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/jwt"
 )
 
 type publicKeyResponse struct {

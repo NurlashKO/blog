@@ -7,7 +7,7 @@ import (
 	"github.com/crewjam/saml"
 	"github.com/crewjam/saml/logger"
 	jwtlib "github.com/golang-jwt/jwt/v5"
-	"nurlashko.dev/auth/internal/jwt"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal/jwt"
 )
 
 // SessionProvider implements saml.SessionProvider interface

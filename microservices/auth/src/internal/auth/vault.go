@@ -7,14 +7,14 @@ import (
 	"github.com/hashicorp/vault-client-go"
 	"github.com/hashicorp/vault-client-go/schema"
 
-	"nurlashko.dev/auth/internal"
+	"github.com/NurlashKO/blog/microservices/auth/src/internal"
 )
 
 type VaultClient struct {
 	vault *vault.Client
 }
 
-const prodAddress = "http://vault:8200"
+const prodAddress = "http://vault.auth:8200"
 const debugAddress = "https://vault.nurlashko.dev"
 
 func NewVaultClient(config internal.Config) *VaultClient {

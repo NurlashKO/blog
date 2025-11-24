@@ -12,7 +12,7 @@ type AuthClient struct {
 	vault *vault.Client
 }
 
-const prodAddress = "http://vault:8200"
+const prodAddress = "http://vault.auth:8200"
 const debugAddress = "https://vault.nurlashko.dev"
 
 func NewAuthClient(debug bool) *AuthClient {

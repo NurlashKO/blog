@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	auth "nurlashko.dev/auth/client"
-	"nurlashko.dev/blog/internal/middleware"
+	auth "github.com/NurlashKO/blog/microservices/auth/src/client"
+	"github.com/NurlashKO/blog/microservices/blog/internal/middleware"
 )
 
 const (

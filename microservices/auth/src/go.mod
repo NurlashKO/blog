@@ -1,4 +1,4 @@
-module nurlashko.dev/auth
+module github.com/NurlashKO/blog/microservices/auth/src
 
 go 1.23.0
 
