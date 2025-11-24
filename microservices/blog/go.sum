@@ -1,3 +1,5 @@
+github.com/NurlashKO/blog/microservices/auth/src v0.0.0-20251124075417-d5ab639634ec h1:8dThLvJd5zjQLksU6S5EJ0e0NgAaOBtH9Oph+icYhgI=
+github.com/NurlashKO/blog/microservices/auth/src v0.0.0-20251124075417-d5ab639634ec/go.mod h1:UHYsDeaH3ruiVuAofQkWkAkvitfZLerA1BjUPtiUXPE=
 github.com/a-h/templ v0.3.960 h1:trshEpGa8clF5cdI39iY4ZrZG8Z/QixyzEyUnA7feTM=
 github.com/a-h/templ v0.3.960/go.mod h1:oCZcnKRf5jjsGpf2yELzQfodLphd2mwecwG4Crk5HBo=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=

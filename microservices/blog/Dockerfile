@@ -1,6 +1,7 @@
-FROM golang:1.23.4-bookworm as builder
+FROM golang:1.23.4-bookworm AS builder
 
-ENV CGO_ENABLED 0
+ENV CGO_ENABLED=0
+ENV GOTOOLCHAIN=auto
 
 RUN apt update && \
     apt install -y --no-install-recommends ca-certificates && \
